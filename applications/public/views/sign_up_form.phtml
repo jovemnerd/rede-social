@@ -1,0 +1,47 @@
+<script language="JavaScript">
+	OAS_VARS('/homepage', 'x07');
+	OAS_START();
+</script>
+<div id="conteudo">
+	<h2 class="aba bigger">Cadastre-se</h2>
+	<p>Vamos fazer seu cadastro nerd. Para começar, precisamos de alguns dados básicos, beleza?</p>
+	<span class="ilustra-nerdinho"></span>
+	<div class="box-login cadastre-se">
+		<form action="<?php echo HOST;?>cadastre-se/processar" method="post" id="frm-cadastro">
+			<fieldset>
+				<div>
+					<label for="login">Login: </label>
+					<input type="text" name="login" id="login" />
+					
+					<label for="email">e-mail: </label>
+					<input type="text" name="email" id="email"/>
+				</div>
+				<div>
+					<label for="password" class="big">Senha: </label>
+					<input type="password" name="password" id="password"/>
+					
+					<label for="password_confirmation">Repita sua senha: </label>
+					<input type="password" name="password_confirmation" id="password_confirmation" />
+				</div>
+				<div>
+					<label for="real_name">Nome real: </label>
+					<input type="text" name="real_name" id="real_name" />
+				</div>
+				<div>
+					<button type="submit" id="signup">Cadastrar</button>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+<div id='div-gpt-ad-1373046795970-3' style='width:300px; height:600px;float:left;margin-left:15px;' class="adsense skyscraper">
+	<script type='text/javascript'>
+		googletag.cmd.push(function() { googletag.display('div-gpt-ad-1373046795970-3'); });
+	</script>
+</div>
+
+<script type="text/javascript">var HOST='<?php echo HOST;?>';</script>
+<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/sign_up.js"></script>
+<style type="text/css">
+	.ajax-loader{position:absolute;right:280px;top:25px;display:none;}
+</style>

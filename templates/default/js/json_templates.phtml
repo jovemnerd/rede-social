@@ -1,0 +1,107 @@
+<!-- Comentários e respostas de comentarios -->
+<script id="newCommentTemplate" type="text/x-jquery-tmpl">
+	{{if isReply == false}}
+		<div class="margem-comentario"></div>
+	{{/if}}
+	
+	<div class="comentario {{if isReply == true}} resposta replies_${in_reply_to} {{else}} comentario_${id} {{/if}}">
+		{{if isReply == true}}
+			<div class="margem-resposta"></div>
+		{{/if}}
+		<a class="apagar comentario" rel="${id}" href="javascript:void(0);">X</a>
+		{{if isReply == false}}
+			<span class="numeroComentario"></span>
+		{{/if}}
+		<span class="dados">
+			<span>
+				<a href="<?php echo HOST.'perfil/';?>${user}">${user}</a>
+				{{if isReply == true}} responde {{else}} diz {{/if}}
+			</span>
+		</span>
+		<div class="data">agora</div>
+		<div class="textoUsuario">
+			<p>{{html comment}}</p>
+		</div>
+		<ul class="dados" rel="${id}">
+			{{if isReply == false}}
+				<li class="bt-positivar"></li>
+				<li class="res-positivar">0</li>
+				<li class="bt-negativar"></li>
+				<li class="res-negativar">0</li>
+				<li class="reply"><a href="javascript:void(0);" rel="{{if isReply == true}} ${in_reply_to} {{else}} ${id} {{/if}}">responder</a></li>
+			{{/if}}
+		</ul>
+		<div class="infoComentarista">
+			<a href="<?php echo HOST.'perfil/'?>${user}">
+				<img src="<?php echo AVATAR_DIR;?>square/${avatar}" alt="" />
+			</a>
+			<ul>
+				<li class="nivel">Nv ${experience.current_level}</li>
+				<li class="exp">Exp ${experience.exp_percent}%</li>
+				<li class="hp">HP ${experience.hp}</li>
+				<li class="badges">
+					{{each badges}}
+						<img src="<?php echo MEDIA_DIR;?>images/badges/${icon_url}"/>
+					{{/each}}
+				</li>
+			</ul>
+		</div>
+		{{if isReply == false}}
+			<div class="reply-area-container">
+				<textarea name="reply" data-post-id="${post_id}"></textarea>
+			</div>
+		{{/if}}
+	</div>
+</script>
+
+<!-- Encontrar aliados -->
+<script id="findFriendList" type="text/x-jquery-tmpl">
+	<ul>
+		<div class="clearfix"></div>
+		{{each users}}
+			<li>
+				<a href="<?php echo HOST;?>perfil/${login}">
+					<img src="<?php echo AVATAR_DIR;?>square/${avatar}" />
+					<div>
+						<span>@${login}</span>
+						<span>${name}</span>
+					</div>
+				</a>
+				<div class="clearfix"></div>
+			</li>
+		{{/each}}
+	</ul>
+</script>
+
+<!-- Aliados, paginação -->
+<script id="friendListPage" type="text/x-jquery-tmpl">
+	{{each allies}}
+		<li>
+			<a href="<?php echo HOST;?>perfil/${login}">
+				<img src="<?php echo MEDIA_DIR;?>images/avatar/square/${avatar}" />
+			</a>
+			<h4>${login}</h4>
+			<h5><a href="<?php echo HOST;?>perfil/${login}">${name}</a></h5>
+		</li>
+	{{/each}}
+</script>
+
+
+<!-- Overlay corte de avatar -->
+<script id="overlayAvatarCrop" type="text/x-jquery-tmpl">
+	<div style="background-color:#f6f6f6;box-shadow:0px 0px 3px #444 inset;"> 
+	 	<input type="hidden" name="x" /> 
+	 	<input type="hidden" name="y" /> 
+	 	<input type="hidden" name="x2" /> 
+	 	<input type="hidden" name="y2" /> 
+	 	<input type="hidden" name="w" /> 
+	 	<input type="hidden" name="h" /> 
+	 	<img src="${src}" id="avatar-crop" /> 
+	 </div> 
+	 <div class="clearfix"></div> 
+	 <div style="text-align:right;min-width:505px;padding-top:10px;" > 
+	 	<p>Agora você pode cortar a imagem ou <a href="javascript:void(0);" class="cut-my-avatar">Corta do jeito que você achar melhor, Slave ROBOTO!</a></p> 
+	 	<button class="cancel">Esquece, nem quero trocar de avatar...</button> 
+	 	<button class="crop-it">Vai, corta aí!</button> 
+	 </div>
+</script>

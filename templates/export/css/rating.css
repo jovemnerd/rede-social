@@ -1,0 +1,25 @@
+/*RATING*/
+div.rate-n-share {height: 23px;position: relative;width: 550px;}
+div.rate-n-share div.thumbs{position:relative; background:transparent url("../images/bg-thumbs-main.png") 0 0 no-repeat; width:100px; height:26px; float:left;}
+div.rate-n-share div.thumbs ul.balao{display:block; position:absolute; height:25px; width:143px; background:transparent url("../images/sprite-thumbs.png") 0 0 no-repeat; left:65px; z-index:90; overflow:hidden;}
+div.rate-n-share div.thumbs ul.balao.alt{height:45px; background-position:0 -50px;}
+div.rate-n-share div.thumbs ul.balao li{display:block; position:absolute; top:200px; background:transparent url("../images/sprite-thumbs.png") 0 0 no-repeat;}
+div.rate-n-share div.thumbs ul.balao li[class*="bt-"]{text-indent:-9999px; width:20px; height:16px; cursor:pointer;}
+div.rate-n-share div.thumbs ul.balao li[class*="bt-"] a{display:block; background-color:#f00;}
+
+div.rate-n-share div.thumbs ul.balao li.bt-positivar {top:5px;left:10px;width:15px;background-position:-13px -121px;}
+div.rate-n-share div.thumbs ul.balao li.bt-positivar.meu-voto{background-position: -84px -121px;}
+div.rate-n-share div.thumbs ul.balao li.bt-negativar {top:5px;left:65px;width:15px;background-position:-65px -121px;}
+div.rate-n-share div.thumbs ul.balao li.bt-negativar.meu-voto{background-position:-102px -121px;}
+
+div.rate-n-share div.thumbs ul.balao li.bt-favoritar{top:4px;left:119px;width:19px;background-position:-6px -140px;}
+div.rate-n-share div.thumbs ul.balao li.bt-favoritar.favorito{background-position:-27px -140px;}
+
+div.rate-n-share div.thumbs ul.balao li[class*="res-"]{border:1px solid #0293a9; width:22px; height:10px; padding:2px; text-align:center; text-indent:0; font-size:10px; color:#0293a9; background-image:none; background-color:#fff; -webkit-border-radius:3px; -moz-border-radius:3px; border-radius:3px; font-family:Arial;}
+div.rate-n-share div.thumbs ul.balao li[class*="res-"] span {background-color:#666;height:12px;width:5px;top:1px;left:-5px;display:block;position:absolute;background:transparent url("../images/sprite-thumbs.png") 0px -5px no-repeat;}
+div.rate-n-share div.thumbs ul.balao li.res-positivar {top:4px;left:32px;}
+div.rate-n-share div.thumbs ul.balao li.res-negativar {top:4px;left:87px;}
+div.rate-n-share div.thumbs ul.balao li.ativo{background: #EFEFEF;}
+
+div.rate-n-share ul.share {float:right;}
+div.rate-n-share ul.share li {display:inline-block;padding:2px 0px;}

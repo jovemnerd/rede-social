@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /configs/
+Disallow: /tmp/logs/
+Disallow: /Phalanx/
+Disallow: /media/
+Disallow: /htdocs/

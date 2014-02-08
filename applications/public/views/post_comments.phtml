@@ -1,0 +1,418 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="<?php echo HOST;?>templates/default/css/reset.css?v=<?php echo CACHE_VERSION;?>" />
+		<link rel="stylesheet" href="<?php echo HOST;?>templates/default/css/comentarios.css?v=<?php echo CACHE_VERSION;?>" />
+		<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.tmpl.min.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/rating.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.autogrow.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/easyXDM.min.js?v=<?php echo CACHE_VERSION;?>"></script>
+	</head>
+	<body>
+		<div id="conteudo">
+			<div class="trigger-comentarios no-margin-left" rel="skynerd_post_<?php echo $this->post_id;?>_comments">
+				<a href="javascript:void(0);" class="qtde-comentarios">
+					<?php if($this->comments == 0):?>
+						<span>Nenhum</span> comentário
+					<?php else:?>
+						<?php if($this->comments == 1):?>
+							<span>1</span> comentário
+						<?php else:?>
+							<span><?php echo $this->comments;?></span> comentários
+						<?php endif;?>
+						<?php if($this->replies > 0):?>
+							<?php if($this->replies == 1):?>
+								(1 resposta)
+							<?php else:?>
+								(<?php echo $this->replies;?> respostas)
+							<?php endif;?>
+						<?php endif;?>
+					<?php endif;?>
+				</a>
+			</div>
+			<div class="comentarios skynerd_post_<?php echo $this->post_id;?>_comments">
+				<?php if(is_array($this->comments_array)):?>
+					<?php	$idx = 0;?>
+					<?php foreach($this->comments_array as $k => $comment):?>
+						
+						<?php
+							$comment_text = trim(nl2br(preg_replace('/(?<=|(?<=[.A-Za-z0-9_-]))@([.A-Za-z0-9_-]+[.A-Za-z0-9_-]+)/', '<a class="profile-link" href="'.HOST.'perfil/$1" target="_blank">@$1</a>', $comment->comment)));
+							if($comment_text == '')
+								continue;
+						?>
+						
+						<?php $classname = ($idx % 2 == 0) ? 'cinza' : '';?>
+						<div class="comentario <?php echo $classname;?> comentario_<?php echo $comment->id;?> no-margin-left">
+							<?php if($this->current_user == $comment->user->login):?>
+								<a class="apagar comentario tooltip" rel="<?php echo $comment->id;?>" href="javascript:void(0);" title="Apagar">X</a>
+							<?php endif;?>
+							<span class="numeroComentario">
+								<?php echo ++$idx;?>
+							</span>
+							<span class="dados">
+								<span>
+									<?php if($comment->create_links):?><a href="<?php echo HOST.'perfil/'.$comment->user->login;?>" target="_blank"><?php endif;?>
+										<?php echo $comment->user->login;?>
+									<?php if($comment->create_links):?></a><?php endif;?>diz:
+								</span>
+							</span>
+							
+							<div class="data"><?php echo $comment->date;?></div>
+							<div class="textoUsuario">
+								<p><?php echo $comment_text;?></p>
+							</div>
+							
+							<ul class="dados" rel="<?php echo $comment->id;?>">
+								<li title="Megaboga!" class="tooltip north bt-positivar <?php echo ($comment->my_rating == '1')?'meu-voto':'';?>"></li>
+								<li class="res-positivar"><?php echo $comment->rating->megaboga;?></li>
+								<li title="Whatever..." class="tooltip north bt-negativar <?php echo ($comment->my_rating == '-1')?'meu-voto':'';?>"></li>
+								<li class="res-negativar"><?php echo $comment->rating->whatever;?></li>
+								<li class="reply"><a href="javascript:void(0);" rel="<?php echo $comment->id;?>">responder</a></li>
+							</ul>
+							
+							<div class="infoComentarista">
+								<?php if($comment->create_links):?><a href="<?php echo HOST.'perfil/'.$comment->user->login;?>" target="_blank"><?php endif;?>
+									<?php
+										$avatar = MEDIA_DIR.'images/avatar/square/' . $comment->user->avatar;
+										if(preg_match('/^http/i', $comment->user->avatar))
+											$avatar = $comment->user->avatar;
+									?>
+									<img src="<?php echo $avatar;?>" alt="" class="lazy" />
+								<?php if($comment->create_links):?></a><?php endif;?>
+								<?php if($comment->user->experience):?>
+									<ul>
+										<li class="nivel">Nv <?php echo $comment->user->experience->current_level;?></li>
+										<li class="exp">Exp <?php echo floor((($comment->user->experience->exp - $comment->user->experience->exp_needed) * 100) / ($comment->user->experience->exp_to_next_level - $comment->user->experience->exp_needed));?>%</li>
+										<li class="hp">HP<?php echo $comment->user->experience->hp;?></li>
+										<?php if(sizeof($comment->user->badges)):?>
+											<li class="badges">
+												<?php foreach($comment->user->badges as $badge):?>
+													<img src="<?php echo MEDIA_DIR;?>images/badges/<?php echo $badge->icon_url;?>" class="lazy" />
+												<?php endforeach;?>
+											</li>
+										<?php endif;?>
+									</ul>
+								<?php endif;?>
+							</div>
+							<div class="reply-area-container">
+								<textarea name="reply" data-post-id="<?php echo $this->post_id;?>"></textarea>
+							</div>
+						</div>
+						<?php if(sizeof($comment->replies)):?>
+							<?php foreach($comment->replies as $reply):?>
+								<div class="comentario resposta <?php echo $classname;?> replies_<?php echo $comment->id;?> no-margin-left">
+									<div class="margem-resposta"></div>
+									<?php if($this->current_user == $reply->user->login):?>
+										<a class="apagar comentario" rel="<?php echo $reply->id;?>" href="javascript:void(0);" title="Apagar">X</a>
+									<?php endif;?>
+									<span class="dados">
+										<span><a href="<?php echo HOST.'perfil/'.$reply->user->login;?>" target="_blank"><?php echo $reply->user->login;?></a> responde:</span>
+									</span>
+									<div class="data">
+										<?php echo $reply->date;?>
+									</div>
+									<div class="textoUsuario">
+										<p><?php echo preg_replace('/(?<=|(?<=[.A-Za-z0-9_-]))@([.A-Za-z0-9_-]+[.A-Za-z0-9_-]+)/', '<a class="profile-link" href="'.HOST.'perfil/$1 target="_blank"e>@$1</a>', $reply->comment);?></p>
+									</div>
+									<div class="infoComentarista">
+										<?php if($comment->create_links):?><a href="<?php echo HOST.'perfil/'.$reply->user->login;?>" target="_blank"><?php endif;?>
+											<?php
+												$avatar = MEDIA_DIR.'images/avatar/square/' . $reply->user->avatar;
+												if(preg_match('/^http/i', $reply->user->avatar))
+													$avatar = $reply->user->avatar;
+											?>
+											<img src="<?php echo $avatar;?>" alt="" class="lazy" />
+										<?php if($comment->create_links):?></a><?php endif;?>
+										<?php if($reply->user->experience):?>
+										<ul>
+											<li class="nivel">Nv <?php echo $reply->user->experience->current_level;?></li>
+											<li class="exp">Exp <?php echo floor((($reply->user->experience->exp - $reply->user->experience->exp_needed) * 100) / ($reply->user->experience->exp_to_next_level - $reply->user->experience->exp_needed));?>%</li>
+											<li class="hp">HP<?php echo $reply->user->experience->hp;?></li>
+											<?php if(sizeof($reply->user->badges)):?>
+												<li class="badges">
+													<?php foreach($reply->user->badges as $badge):?>
+														<img src="<?php echo MEDIA_DIR;?>images/badges/<?php echo $badge->icon_url;?>" class="lazy" />
+													<?php endforeach;?>
+												</li>
+											<?php endif;?>
+										</ul>
+										<?php endif;?>
+									</div>
+								</div>
+							<?php endforeach;?>
+						<?php endif;?>
+						<?php if($idx !== sizeof($this->comments_array)):?>
+							<div class="margem-comentario"></div>
+						<?php endif;?>
+					<?php endforeach;?>
+				<?php endif;?>
+			</div>
+			<?php if($this->logged_in === true):?>
+				<div class="comentar skynerd_post_<?php echo $this->post_id;?>_area_comentario no-margin-left">
+					<form action="<?php echo HOST;?>comentar-post/" method="post">
+						<fieldset>
+							<input type="hidden" value="<?php echo $this->post_id;?>" name="post_id" />
+							<textarea name="comment"></textarea>
+							<span>
+								Pressione Shift+Enter para pular uma linha
+								<img src="<?php echo HOST;?>templates/default/images/comments-ajax-loader.gif" class="ajax-loader" />
+							</span>
+						</fieldset>
+					</form>
+					<div class="clearfix"></div>
+				</div>
+			<?php else:?>
+				<div class="must-be-logged_in">
+					<p>Nerd, é necessário que você esteja logado na <a target="_blank" href="<?php echo HOST;?>login">Skynerd</a> para comentar aqui.</p>
+					<p>Já é cadastrado? Então faz o login aqui :)</p>
+					<form class="skynerd-login">
+						<fieldset>
+							<label for="username">Usuário:</label>
+							<input type="text" name="username" id="username" />
+							
+							<label for="password">Senha:</label>
+							<input type="password" name="password" id="password" />
+							
+							<button>ENTRAR</button>
+						</fieldset>
+					</form>
+					<p>AINDA não tem conta? <a href="<?php echo HOST;?>cadastre-se">Cadastre-se</a> e faça parte do universo Jovem Nerd :)</p>
+				</div>
+			<?php endif;?>
+		</div>
+		<script type="text/javascript">
+		
+		var HOST = "<?php echo HOST;?>";
+				
+		function RedefinirUltimoComentario() {
+			$("#conteudo div.comentarios").each(function() {
+				var $comentarios = $(this);
+				$comentarios.each(function() {
+					var $prev = $(this).find("div.comentario:first").prev();
+					if ($prev.hasClass("margem-comentario"))
+						$prev.remove();
+		
+					$(this).find("div.comentario.ultimo").removeClass('ultimo');
+					var $next = $(this).find("div.comentario:last").addClass("ultimo").next();
+					if ($next.hasClass("margem-comentario"))
+						$next.remove();
+						
+					var current_comment=0;
+					$(this).find("div.comentario:not(.resposta)").each(function(){
+						$(this).find("span.numeroComentario").html(++current_comment);
+					});
+				});
+			});
+		}
+		
+		function SetCommentSettings(){
+			comment_placeholder = 'Comenta aí nerd!';
+			$("div.comentar form textarea").autogrow({
+				minHeight : 14,
+				resizeParentElement : true
+			});
+			
+			
+			
+			$("li.reply a").live('click', function() {
+				$(this).hide().parent().parent().parent().find(".reply-area-container").show().find("textarea").data("in-reply-to", $(this).attr('rel')).focus().autogrow({
+					resizeParentElement : false,
+					minHeight : 18
+				});
+			});
+		
+		
+		
+		
+			$(".reply-area-container textarea").live("keyup keypress keydown", function(e) {
+				keycode = (e.which) ? e.which : e.keyCode;
+				if (keycode == 27) {
+					$(this).data("in-reply-to", '').val(comment_placeholder).blur().parent().hide().parent().find("li.reply a").show();
+				}
+			});
+	
+	
+	
+			$("textarea[name=comment]").val(comment_placeholder).focus(function(e) {
+				if ($(this).val() == comment_placeholder) {
+					$(this).val('');
+				}
+			}).live("blur", function(e) {
+				if ($(this).val() == "") {
+					$(this).val(comment_placeholder);
+				}
+			}).live("keydown", function(e) {
+				if (e.which == 13 && !e.shiftKey) {
+					if ($(this).val().trim().length > 0) {
+						e.preventDefault();
+					}
+				}
+			}).live("keyup", function(e) {
+				if (e.which == 13 && !e.shiftKey) {
+					var $form_el = $(this).parent().parent();
+					var $el = $(this);
+		
+					e.preventDefault();
+		
+					if ($.trim($(this).val()) != "") {
+						
+						$el.parent().find("span > img").show()
+						
+						$.ajax({
+							type : $form_el.attr("method"),
+							data : $form_el.serialize(),
+							url : $form_el.attr("action"),
+							beforeSend: function(){
+								$el.attr("disabled", true);
+							},
+							success : function(response) {
+								if(response.status == 0){
+									alert(response.message);
+								} else {
+									var $comment = $("#newCommentTemplate").tmpl(response);
+									$comment.addClass("no-margin-left");
+									var in_reply_to = $form_el.find("input[name=in_reply_to]").val();
+									var post_id = $form_el.find("input[name=post_id]").val();
+									
+									$(".skynerd_post_" + post_id + "_comments").append($comment);
+									RedefinirUltimoComentario();
+								}
+								
+								$el.val('').keyup().removeAttr("disabled").parent().find("span > img").hide()
+								var height = $("#conteudo").height();
+								socket.postMessage(height)
+							}
+						});
+					}
+		
+				}
+			});
+
+
+			$("textarea[name=reply]").val(comment_placeholder).focus(function(e){
+				if ($(this).val() == comment_placeholder){
+					$(this).val('');
+				}
+			}).live("blur", function(e){
+				if ($(this).val() == ""){
+					$(this).val(comment_placeholder);
+				}
+			}).live("keydown", function(e){
+				if (e.which == 13 && !e.shiftKey){
+					if ($(this).val().trim().length > 0){
+						e.preventDefault();
+					}
+				}
+			}).live("keyup", function(e){
+				if (e.which == 13 && !e.shiftKey) {
+					if($.trim($(this).val()) == "")
+						return;
+					
+					var $el = $(this);
+					
+					$.ajax({
+						url: HOST+"comentar-post",
+						type: "post",
+						data: {
+							in_reply_to: $el.data("in-reply-to"),
+							post_id: $el.data("post-id"),
+							comment: $el.val()
+						},
+						success: function(response){
+							
+							if(response.status == 1){
+								var $reply = $("#newCommentTemplate").tmpl(response);
+								$reply.addClass("no-margin-left");
+								var $comment = $(".comentario_" + $.trim($el.data("in-reply-to")));
+								
+								if($comment.hasClass("cinza"))
+									$reply.addClass("cinza");
+								
+								if($(".replies_" + $el.data("in-reply-to")).length > 0){
+									$reply.insertAfter($(".replies_" + $el.data("in-reply-to") + ":last"));
+								} else {
+									$reply.insertAfter($comment);	
+								}
+								
+								RedefinirUltimoComentario();
+			
+								var e = $.Event("keydown");
+								e.which = 27;
+								$el.trigger(e);
+								
+								var height = $("#conteudo").height();
+								socket.postMessage(height)
+							} else {
+								alert(response.message)
+							}
+						}
+					});
+				}
+			});
+	
+	
+		}
+		
+		
+			$(document).ready(function(){
+				
+				$("form").submit(function(event){
+					event.stopPropagation();
+					event.preventDefault();
+					
+					var username = $("input[name=username]").val();
+					var password = $("input[name=password]").val();
+					
+					
+					$.ajax({
+						url: "<?php echo HOST;?>mini-ficha/login",
+						type: "POST",
+						beforeSend: function(){
+							$("form button").hide();
+							$("form img.loading-image").fadeIn();
+						},
+						crossDomain: true,
+						data: {
+							username: username,
+							password: password
+						},
+						success: function(data){
+							var o = jQuery.parseJSON(data);
+							if(o.status == true){
+								$(".must-be-logged_in").remove();
+								html = '<div class="comentar skynerd_post_<?php echo $this->post_id;?>_area_comentario no-margin-left">'
+										+'	<form action="<?php echo HOST;?>comentar-post/" method="post">'
+										+'		<fieldset>'
+										+'			<input type="hidden" value="<?php echo $this->post_id;?>" name="post_id" />'
+										+'			<textarea name="comment"></textarea>'
+										+'			<span>Pressione Shift+Enter para pular uma linha</span>'
+										+'		</fieldset>'
+										+'	</form>'
+										+'	<div class="clearfix"></div>'
+										+'</div>'
+								$("#conteudo").append(html);
+								SetCommentSettings();
+							} else {
+								$("form button").show();
+								$("form img.loading-image").hide();
+							}
+						}
+					})
+				});
+				
+				
+				RedefinirUltimoComentario();
+				SetCommentSettings();
+				
+			});
+			
+			var socket = new easyXDM.Socket({
+				onReady:  function(){
+					var height = $("#conteudo").height();
+					socket.postMessage(height)
+				}
+			});
+		</script>
+		<?php require_once(TEMPLATE_DIR."default/js/json_templates.phtml");?>
+	</body>
+</html>

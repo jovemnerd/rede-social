@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>Skynerd</title>
+		<link href="<?php echo HOST;?>templates/default/css/reset.css" rel="stylesheet" type="text/css" charset="utf-8" />		
+		<link href="<?php echo HOST;?>templates/default/css/estilos.css" rel="stylesheet" type="text/css" charset="utf-8" />
+		<link href="<?php echo HOST;?>templates/default/css/jquery.jcrop.css" rel="stylesheet" type="text/css" charset="utf-8" />
+		<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.js"></script>
+		<link rel="shortcut icon" href="<?php echo HOST;?>favicon.ico" type="image/x-icon" />
+		
+				<script type="text/javascript">
+		    var _gaq = _gaq || [];
+		    _gaq.push(['_setAccount', 'UA-28965970-1']);
+		    _gaq.push(['_trackPageview']);
+		    _gaq.push(['ig._setAccount', 'UA-3531175-1']);
+		    _gaq.push(['ig._trackPageview']);
+		   
+		    (function() {
+		      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		    })(); 
+		   
+			var _comscore = _comscore || [];
+			_comscore.push({ c1: "2", c2: "6987205" });
+			(function() {
+			var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+			s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+			el.parentNode.insertBefore(s, el);
+			})();
+		</script>
+		<noscript>
+			<img src="http://b.scorecardresearch.com/p?c1=2&c2=6987205&cv=2.0&cj=1" />
+		</noscript>
+	</head>
+	<body class="pagina-login">
+		<div id="overlay">
+			<div class="background"></div>
+			<div class="content"></div>
+			<div class="clearfix"></div>
+		</div>
+		<div id="wrapper" class="notfound">
+			<div id="header" class="min">
+				<div id="nav">			
+					<h1>
+						<a href="<?php echo HOST;?>"><img src="<?php echo HOST;?>templates/default/images/logo-skynerd.png" alt="skynerd" /></a>
+						<img src="<?php echo HOST;?>templates/default/images/logo-message.png" alt="a rede social" />
+						<a href="http://jovemnerd.ig.com.br"><img src="<?php echo HOST;?>templates/default/images/logo-jovemnerd.png" alt="jovemnerd" /></a>
+					</h1>
+					<?php if($this->show_login_bar == true):?>
+						<span>Você está desconectado<a href="<?php echo HOST;?>">Acessar Skynerd</a></span>
+					<?php endif;?>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div id="container">
+				<img src="<?php echo HOST;?>templates/error/img/not-found-bg.png" />
+				<div class="message">
+					<h2>404</h2>
+					<h3>Parabéns, você chegou ao Acre</h3>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div id="rodape">
+				<div>
+					<p>&copy; <span>2002</span>-<span><?php echo date('Y');?></span> <span>Jovem Nerd</span> | <span>Pazos e Ottoni</span> | <span>Versão 6.0 (</span>Lambda<span>)</span></p>
+					<p>Todas as imagens de filmes, séries, etc são</p>
+					<p>marcas registradas dos seus respectivos proprietários</p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<img src="http://ad.yieldmanager.com/pixel?id=2174823&t=2" width="1" height="1" />
+    </body>
+</html>

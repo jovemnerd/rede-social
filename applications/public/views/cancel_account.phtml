@@ -1,0 +1,20 @@
+<div class="subcontainer cancel-account">
+	<h3>/quit Skynerd</h3>
+	<div class="content">
+		<p>
+			Não se vá nerd, <br/>
+			Olha o tanto de gente que vai sentir a sua falta:
+		</p>
+		
+		<ul>
+			<?php foreach($this->data as $user):?>
+				<li>
+					<img src="<?php echo MEDIA_DIR;?>images/avatar/small/<?php echo $user->avatar;?>" />
+				</li>
+			<?php endforeach;?>
+		</ul>
+		
+		<a href="<?php echo HOST;?>perfil/configuracoes/cancelar-conta/segundo-passo">É isso mesmo, quero cancelar minha conta!</a>
+		<a href="<?php echo HOST;?>perfil/configuracoes">O que estou fazendo?? Me tire daqui!</a>
+	</div>
+</div>

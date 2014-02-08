@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>Skynerd</title>
+		<link href="<?php echo HOST;?>templates/default/css/reset.css" rel="stylesheet" type="text/css" charset="utf-8" />		
+		<link href="<?php echo HOST;?>templates/default/css/estilos.css" rel="stylesheet" type="text/css" charset="utf-8" />
+		<link href="<?php echo HOST;?>templates/default/css/jquery.jcrop.css" rel="stylesheet" type="text/css" charset="utf-8" />
+		<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.js"></script>
+		<link rel="shortcut icon" href="<?php echo HOST;?>favicon.ico" type="image/x-icon" />
+		<script type='text/javascript'>
+			var googletag = googletag || {};
+			googletag.cmd = googletag.cmd || [];
+			(function() {
+				var gads = document.createElement('script');
+				gads.async = true;
+				gads.type = 'text/javascript';
+				var useSSL = 'https:' == document.location.protocol;
+				gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+				var node = document.getElementsByTagName('script')[0];
+				node.parentNode.insertBefore(gads, node);
+			})();
+		</script>
+		<script type='text/javascript'>
+			googletag.cmd.push(function() {
+				googletag.defineSlot('/22837869/jn_c_skynerd_120x600_I_33', [120, 600], 'div-gpt-ad-1373046795970-0').addService(googletag.pubads());
+				googletag.defineSlot('/22837869/jn_c_skynerd_1680x1024_I_34', [1680, 1024], 'div-gpt-ad-1373046795970-1').addService(googletag.pubads());
+				googletag.defineSlot('/22837869/jn_c_skynerd_300x250_I_31', [300, 250], 'div-gpt-ad-1373046795970-2').addService(googletag.pubads());
+				googletag.defineSlot('/22837869/jn_c_skynerd_300x600_I_46', [300, 600], 'div-gpt-ad-1373046795970-3').addService(googletag.pubads());
+				googletag.defineSlot('/22837869/jn_c_skynerd_728x90_I_32', [728, 90], 'div-gpt-ad-1373046795970-4').addService(googletag.pubads());
+				googletag.defineSlot('/22837869/jn_c_skynerd_login_300x250_I_31', [300, 250], 'div-gpt-ad-1373046795970-5').addService(googletag.pubads());
+				
+				googletag.pubads().enableSingleRequest();
+				googletag.enableServices();
+			});
+		</script>
+	</head>
+	<body class="pagina-login">
+		<div id="overlay">
+			<div class="background"></div>
+			<div class="content"></div>
+			<div class="clearfix"></div>
+		</div>
+		<div id="wrapper">
+			<div id="header" class="min">
+				<div id="nav">			
+					<h1>
+						<a href="<?php echo HOST;?>"><img src="<?php echo HOST;?>templates/default/images/logo-skynerd.png" alt="skynerd" /></a>
+						<img src="<?php echo HOST;?>templates/default/images/logo-message.png" alt="a rede social" />
+						<a href="http://jovemnerd.ig.com.br"><img src="<?php echo HOST;?>templates/default/images/logo-jovemnerd.png" alt="jovemnerd" /></a>
+					</h1>
+					<?php if($this->show_login_bar == true):?>
+						<span>Você está desconectado<a href="<?php echo HOST;?>">Acessar Skynerd</a></span>
+					<?php endif;?>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<div id="container">
+				<?php $this->loadViewContent();?>
+				<div class="clearfix"></div>
+			</div>
+			<div id="rodape">
+				<div>
+					<p>&copy; <span>2002</span>-<span><?php echo date('Y');?></span> <span>Jovem Nerd</span> | <span>Pazos e Ottoni</span> | <span>Versão 6.0 (</span>Lambda<span>)</span></p>
+					<p>Todas as imagens de filmes, séries, etc são</p>
+					<p>marcas registradas dos seus respectivos proprietários</p>
+				</div>
+				
+				<div class="clearfix"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<img src="http://ad.yieldmanager.com/pixel?id=2174823&t=2" width="1" height="1" />
+    </body>
+</html>

@@ -1,0 +1,87 @@
+<h2>Procurar usuários</h2>
+<div>
+	<form method="get" action="<?php echo HOST.URI?>">
+		<div>
+			<label for="user">Login:</label>
+			<input type="text" id="user" name="user" />
+			<button>Visualizar Detalhes</button>
+		</div>
+	</form>
+	<?php if($this->user):?>
+		<div class="user">
+			<img class="avatar" src="<?php echo AVATAR_DIR;?>big/<?php echo $this->user->data->avatar;?>" />
+			<div class="info">
+				<h3><?php echo $this->user->name;?> <span>@<?php echo $this->user->login;?></span></h3>
+				<hr />
+				<ul class="data">
+					<li><b>ID</b>: <?php echo $this->user->id;?></li>
+					<li><b>Email</b>: <?php echo $this->user->email;?></li>
+					<li><b>Data de cadastro</b>: <?php echo $this->user->created_at;?> </li>
+					<li><b>Último login</b>: <?php echo $this->user->last_login;?> </li>
+					<li><b>Sexo</b>: <?php echo $this->user->data->genre;?></li>
+					<li><b>Telefone</b>: <?php echo $this->user->data->telephone;?></li>
+					<li><b>Profissão</b>: <?php echo $this->user->data->profession;?></li>
+					<li><b>Cidade</b>: <?php echo $this->user->data->address;?></li>
+				</ul>
+				
+				<h5>Experiência</h5>
+				<hr />
+				<ul class="data">
+					<li><b>Level</b>: <?php echo $this->user->experience->current_level;?></li>
+					<li><b>HP</b>: <?php echo $this->user->experience->hp;?>/10</li>
+					<li><b>EXP</b>: <?php echo $this->user->experience->exp;?></li>
+				</ul>
+				
+				<h5>Badges</h5>
+				<hr />
+				<ul class="badges">
+					<?php foreach($this->user->badges as $badge):?>
+						<li>
+							<img src="<?php echo HOST;?>media/images/badges/<?php echo $badge->icon_url;?>" />
+						</li>
+					<?php endforeach;?>
+				</ul>
+				<div class="clear"></div>
+				
+				<h5>Redes sociais</h5>
+				<hr />
+				<ul class="data">
+					<?php foreach($this->user->social_networks as $sn):?>
+					<li>
+						<b><?php echo $sn->name;?></b>:
+						<?php
+						$token = $sn->access_token;
+						$serialized_data = unserialize($token);
+						if($serialized_data){
+							switch($sn->name){
+								case 'TWITTER':
+									$token = $serialized_data['screen_name'];
+									break;
+									
+								case 'FACEBOOK':
+									$token = $serialized_data->userID;
+									break;
+									
+								case 'YOUTUBE':
+									$token = $serialized_data->username;
+									break;
+							}
+						}
+						echo $token;
+						?>
+					</li>
+					<?php endforeach;?>
+				</ul>
+				
+				<h5>Ações disponíveis</h5>
+				<hr />
+				
+				<ul class="actions">
+					<li><a href="<?php echo ($this->user->banned != '') ? 'javascript:void(0);' : HOST.'adm/usuarios/ban/?user='.$this->user->login;?>" <?php echo ($this->user->banned == '') ? '' : 'class="disabled"';?>>Banir</a></li>
+					<li><a href="<?php echo ($this->user->banned != '') ? HOST.'adm/usuarios/unban/?user='.$this->user->login : 'javascript:void(0);';?>" <?php echo ($this->user->banned == '') ? 'class="disabled"' : '';?>>Desbanir</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="clear"></div>
+	<?php endif;?>
+</div>

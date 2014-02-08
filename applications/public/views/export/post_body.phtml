@@ -1,0 +1,246 @@
+<?php
+	$categories=array();
+	if(is_array($this->categories)){
+		foreach($this->categories as $category){
+			$categories[] = $category->name;
+		}
+	}
+
+	$isNFSW = false;
+	$postAddClass = '';
+	if($this->accept_nsfw == false){
+		foreach($this->categories as $category){
+			if($category->name == 'NSFW'){
+				$isNFSW = true;
+				$postAddClass = 'hidden';
+				break;
+			}
+		}	
+	}
+?>
+<div class="post-container">
+	<div class="post skynerd_post_<?php echo $this->post_id;?>" data-post-id="<?php echo max($this->original_id, $this->post_id);?>">
+		<?php if($this->promoted == true):?>
+			<div class="tooltip east promoted" title="Post Promovido"></div>
+		<?php else:?>
+			<?php if($this->its_mine):?>
+				<a class="apagar east post tooltip" rel="<?php echo $this->post_id;?>" href="javascript:void(0);" title="Apagar">X</a>
+			<?php endif;?>
+		<?php endif;?>
+		
+		<div class="dados-usuario">
+			<a class="avatar-usuario" href="<?php echo HOST.'perfil/'.$this->user;?>">
+				<img <?php if(! Request::isAjax()):?>src="./media/images/blank.gif" data-<?php endif;?>src="./images/avatar/square/<?php echo $this->avatar;?>" class="lazy" />
+			</a>
+			<?php if($this->user_points):?>
+				<div class="informacoes">
+					<span><a href="<?php echo HOST.'perfil/'.$this->user;?>"><?php echo $this->user;?></a></span>
+					<span>Nv: <?php echo $this->user_points->current_level;?></span>
+					<span>Exp: <?php echo $this->user_points->exp_percent;?> %</span>
+					<span>HP: <?php echo $this->user_points->hp;?>/10</span>
+				</div>
+			<?php endif;?>
+			
+			<?php if($this->reblogged_from):?>
+				<img class="reblog-icon" src="<?php echo HOST;?>templates/default/images/reblog-icon.png" />
+				
+				<div class="info-reblog">
+					<a class="avatar-usuario" href="<?php echo HOST.'perfil/'.$this->reblogged_from;?>">
+						<img <?php if(! Request::isAjax()):?>src="./media/images/blank.gif" data-<?php endif;?>src="<?php echo AVATAR_DIR;?>square/<?php echo $this->reblog_avatar;?>" class="lazy" />
+					</a>
+					<div class="informacoes-reblog">
+						<span><a href="<?php echo HOST.'perfil/'.$this->reblogged_from;?>"><?php echo $this->reblogged_from;?></a></span>
+						<span>Nv: <?php echo $this->reblog_points->current_level;?></span>
+						<span>Exp: <?php echo $this->reblog_points->exp_percent;?> %</span>
+						<span>HP: <?php echo $this->reblog_points->hp;?>/10</span>
+					</div>
+				</div>
+			<?php endif;?>
+		</div>
+		<div class="comentario">
+			<h2>
+				<?php $safe_url = mb_strtolower(preg_replace('/--+/u', '-', preg_replace('/[^\w\-]+/u', '-', html_entity_decode($this->title))));?>
+				<?php if($this->title):?>
+					<a href="<?php echo HOST;?>perfil/<?php echo $this->user;?>/post/<?php echo ($this->id) ? $this->id : $this->post_id;?>-<?php echo $safe_url;?>"><?php echo $this->title;?></a>
+				<?php else:?>
+					<a href="<?php echo HOST.'perfil/'.$this->user;?>"><?php echo $this->user;?></a>
+				<?php endif;?>
+			</h2>
+			<h5>
+				<?php if($this->title):?>
+					<?php if($this->reblogged_from):?>
+						<a href="<?php echo HOST;?>perfil/<?php echo $this->reblogged_from;?>/post/<?php echo $this->post_id;?>-<?php echo $safe_url;?>"><?php echo $this->original_date;?></a>
+						por <a href="<?php echo HOST.'perfil/'.$this->reblogged_from;?>"><?php echo $this->reblogged_from;?></a>,
+						
+						reblogado <a href="<?php echo HOST;?>perfil/<?php echo $this->user;?>/post/<?php echo ($this->id) ? $this->id : $this->post_id;?>-<?php echo $safe_url;?>"><?php echo $this->when;?></a>
+						por <a href="<?php echo HOST.'perfil/'.$this->user;?>"><?php echo $this->user;?></a>
+						<?php if($this->reblog_count > 1):?>
+							<?php if($this->reblog_count == 2):?>
+								e mais 1 aliado
+							<?php else:?>
+								e mais <?php echo $this->reblog_count - 1;?> aliados
+							<?php endif;?>
+						<?php endif;?>
+					<?php else:?>
+						<a href="<?php echo HOST;?>perfil/<?php echo $this->user;?>/post/<?php echo $this->post_id;?>-<?php echo $safe_url;?>"><?php echo $this->when;?></a>
+						por <a href="<?php echo HOST.'perfil/'.$this->user;?>"><?php echo $this->user;?></a>
+					<?php endif;?>
+				<?php endif;?>
+				<?php if($this->categories):?>
+					<?php if(sizeof($categories) == 1):?>
+						na categoria <?php echo $categories[0];?>.
+					<?php else:?>
+						nas categorias <?php echo join(', ', $categories);?>.
+					<?php endif;?>
+				<?php endif;?>	
+			</h5>
+			<?php if($isNFSW):?>
+				<div class="post-content nsfw">
+					<h2>Opa opa oooooopa!</h2>
+					<p>De acordo com as <a href="<?php echo HOST;?>perfil/configuracoes">configurações da sua conta</a>, você prefere que conteúdo NSFW não seja exibido e por isso o conteúdo deste post está escondido!</p>
+					<p>Se mesmo assim quiser ver o conteúdo desta postagem, <a class="show-nsfw-content" href="javascript:void(0);">clique aqui</a>.</p>
+				</div>
+			<?php endif;?>
+			<div class="post-content <?php echo $postAddClass;?>"><?php echo $this->content;?></div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="rate-n-share">
+			<div class="thumbs">
+				<ul class="balao" rel="<?php echo $this->post_id;?>">
+					<li class="tooltip south bt-positivar <?php echo ($this->my_rating == '1')?'meu-voto':'';?>" title="Megaboga!"></li>
+					<li class="res-positivar"><span></span><?php echo $this->rating->megaboga;?></li>
+					
+					<li class="tooltip south bt-negativar <?php echo ($this->my_rating == '-1')?'meu-voto':'';?>" title="Whatever"></li>
+					<li class="res-negativar"><span></span><?php echo $this->rating->whatever;?></li>
+					
+					<li class="bt-favoritar tooltip south <?php echo $this->is_favorite ? 'favorito':'';?>" title="Favoritar"></li>
+					<?php
+						if($this->original_id)
+							$reblog_id = $this->original_id;
+						else
+							$reblog_id = $this->post_id;
+					?>
+					<li class="bt-reblog tooltip south <?php echo $this->is_reblogged ? 'reblogged':'';?>" title="Reblogar" data-post-id="<?php echo $reblog_id;?>"></li>
+					<li class="res-reblog"><span></span><?php echo $this->rating->reblog_count;?></li>
+				</ul>
+				
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="trigger-comentarios" rel="skynerd_post_<?php echo $this->post_id;?>_comments">
+		<a href="javascript:void(0);" class="qtde-comentarios">
+			<?php if($this->comments == 0):?>
+				<span>Nenhum</span> comentário
+			<?php else:?>
+				<?php if($this->comments == 1):?>
+					<span>1</span> comentário
+				<?php else:?>
+					<span><?php echo $this->comments;?></span> comentários
+				<?php endif;?>
+				<?php if($this->replies > 0):?>
+					<?php if($this->replies == 1):?>
+						(1 resposta)
+					<?php else:?>
+						(<?php echo $this->replies;?> respostas)
+					<?php endif;?>
+				<?php endif;?>
+			<?php endif;?>
+		</a>
+		<?php if($this->comments > 0):?>
+			<?php if(! is_array($this->comments_array)):?>
+				<a href="javascript:void(0);" class="obter-comentarios" ref="<?php echo $this->post_id;?>">Clique para ver todos os comentários</a>
+				<img src="<?php echo HOST;?>templates/default/images/comments-ajax-loader.gif" class="comment-ajax-loader" />
+			<?php endif;?>
+		<?php endif;?>
+	</div>
+	<div class="comentarios skynerd_post_<?php echo $this->post_id;?>_comments">
+		<?php if(is_array($this->comments_array)):?>
+			<?php	$idx = 0;?>
+			<?php foreach($this->comments_array as $k => $comment):?>
+				<?php $classname = ($idx % 2 == 0) ? 'cinza' : '';?>
+				<div class="comentario <?php echo $classname;?> comentario_<?php echo $comment->id;?>">
+					<span class="numeroComentario">
+						<?php echo ++$idx;?>
+					</span>
+					<span class="dados">
+						<span><a href="<?php echo HOST.'perfil/'.$comment->user->login;?>"><?php echo $comment->user->login;?></a> diz:</span>
+					</span>
+					
+					<div class="data"><?php echo $comment->date;?></div>
+					<div class="textoUsuario">
+						<p><?php echo preg_replace('/(?<=|(?<=[.A-Za-z0-9_-]))@([.A-Za-z0-9_-]+[.A-Za-z0-9_-]+)/', '<a class="profile-link" href="'.HOST.'perfil/$1">@$1</a>', nl2br($comment->comment));?></p>
+					</div>
+					
+					<ul class="dados" rel="<?php echo $comment->id;?>">
+						<li title="Megaboga!" class="tooltip north bt-positivar <?php echo ($comment->my_rating == '1')?'meu-voto':'';?>"></li>
+						<li class="res-positivar"><?php echo $comment->rating->megaboga;?></li>
+						<li title="Whatever..." class="tooltip north bt-negativar <?php echo ($comment->my_rating == '-1')?'meu-voto':'';?>"></li>
+						<li class="res-negativar"><?php echo $comment->rating->whatever;?></li>
+						<li class="reply"><a href="javascript:void(0);" rel="<?php echo $comment->id;?>">responder</a></li>
+					</ul>
+					<div class="infoComentarista">
+						<a href="<?php echo HOST.'perfil/'.$comment->user->login;?>">
+							<img src="<?php echo HOST;?>media/images/blank.gif" data-src="./images/avatar/square/<?php echo $comment->user->avatar;?>" alt="" class="lazy" />
+						</a>
+						<ul>
+							<li class="nivel">Nv <?php echo $comment->user->experience->current_level;?></li>
+							<li class="exp">Exp <?php echo $comment->user->experience->exp_percent;?>%</li>
+							<li class="hp">HP<?php echo $comment->user->experience->hp;?></li>
+							<?php if(sizeof($comment->user->badges)):?>
+								<li class="badges">
+									<?php foreach($comment->user->badges as $badge):?>
+										<img src="<?php echo HOST;?>media/images/blank.gif" data-src="./images/badges/<?php echo $badge->icon_url;?>" class="lazy" />
+									<?php endforeach;?>
+								</li>
+							<?php endif;?>
+						</ul>
+					</div>
+					<div class="reply-area-container">
+						<textarea name="reply" data-post-id="<?php echo $this->post_id;?>"></textarea>
+					</div>
+				</div>
+				<?php if(sizeof($comment->replies)):?>
+					<?php foreach($comment->replies as $reply):?>
+						<div class="comentario resposta <?php echo $classname;?> replies_<?php echo $comment->id;?>">
+							<div class="margem-resposta"></div>
+							<?php if($this->current_user == $reply->user->login):?>
+								<a class="apagar comentario" rel="<?php echo $reply->id;?>" href="javascript:void(0);" title="Apagar">X</a>
+							<?php endif;?>
+							<span class="dados">
+								<span><a href="<?php echo HOST.'perfil/'.$reply->user->login;?>"><?php echo $reply->user->login;?></a> responde:</span>
+							</span>
+							<div class="data">
+								<?php echo $reply->date;?>
+							</div>
+							<div class="textoUsuario">
+								<p><?php echo preg_replace('/(?<=|(?<=[.A-Za-z0-9_-]))@([.A-Za-z0-9_-]+[.A-Za-z0-9_-]+)/', '<a class="profile-link" href="'.HOST.'perfil/$1"e>@$1</a>', nl2br($reply->comment));?></p>
+							</div>
+							<div class="infoComentarista">
+								<a href="<?php echo HOST.'perfil/'.$reply->user->login;?>">
+									<img src="./media/images/blank.gif" data-src="./images/square/<?php echo $reply->user->avatar;?>" alt="" class="lazy" />
+								</a>
+								<ul>
+									<li class="nivel">Nv <?php echo $reply->user->experience->current_level;?></li>
+									<li class="exp">Exp <?php echo $reply->user->experience->exp_percent;?>%</li>
+									<li class="hp">HP<?php echo $reply->user->experience->hp;?></li>
+									<?php if(sizeof($reply->user->badges)):?>
+										<li class="badges">
+											<?php foreach($reply->user->badges as $badge):?>
+												<img src="./media/images/blank.gif" data-src="./images/badges/<?php echo $badge->icon_url;?>" class="lazy" />
+											<?php endforeach;?>
+										</li>
+									<?php endif;?>
+								</ul>
+							</div>
+						</div>
+					<?php endforeach;?>
+				<?php endif;?>
+				<div class="margem-comentario"></div>
+			<?php endforeach;?>
+		<?php endif;?>
+	</div>
+	<div class="margem-post margem_post_<?php echo $this->post_id;?>"></div>
+	<div class="clearfix"></div>
+</div>

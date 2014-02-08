@@ -1,0 +1,295 @@
+<div id="lateral">
+	<div class="box perfil">
+		<div class="perfil-usuario alt">
+			<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo MEDIA_DIR;?>images/avatar/big/<?php echo $this->data->aditional_info->avatar;?>" alt="" class="profile-avatar-image lazy" />
+			<?php if($this->data->its_me == false):?>
+				<?php if($this->data->friendship_status === '1'):?>
+					<a href="javascript:void(0);" class="send-dm tooltip" title="Enviar mensagem particular" rel="({uid:'<?php echo $this->data->id;?>', avatar:'<?php echo $this->data->aditional_info->avatar;?>', username:'<?php echo $this->data->login;?>'});">ENVIAR DM</a>
+				<?php endif;?>
+			<?php endif;?>
+			<div class="clearfix"></div>
+			<?php if($this->data->its_me == false):?>
+				<?php if($this->data->friendship_status === false):?>
+					<button class="request-friendship" rel="<?php echo $this->data->id;?>">adicionar aliado</button>
+				<?php elseif($this->data->friendship_status === '0'):?>
+					<button class="sem-acao">pedido de aliança pendente</button>
+				<?php elseif($this->data->friendship_status === '1'):?>
+					<button id="remove-friend" rel="<?php echo $this->data->id;?>">excluir aliado</button>
+				<?php endif;?>
+			<?php endif;?>
+			
+			<h1><?php echo $this->data->login;?></h1>
+			<h2><?php echo $this->data->name;?></h2>
+			<?php if($this->data->its_me or $this->data->privacy->stats == 0 or ($this->data->privacy->stats==1 && $this->data->friendship_status === '1' )):?>
+			<ul>
+				<li><span class="titulo">Pontos de vida:</span> <span class="conteudo"><?php echo $this->data->experience->hp;?> / 10</span><div class="clearfix" /></li>
+				<li><span class="titulo">Ouro:</span> <span class="conteudo"><?php echo $this->data->experience->gold;?></span><div class="clearfix" /></li>
+				<li><span class="titulo">Nível:</span> <span class="conteudo"><?php echo $this->data->experience->current_level;?></span><div class="clearfix" /></li>
+				<li style="border-bottom: none;">
+					<span class="titulo">Experiência:</span>
+					<span class="exp-proximo-level conteudo"><?php echo $this->data->experience->exp_percent;?>%</span> 
+					<div class="clearfix"></div>
+					<div class="barra-exp-container tooltip north" title="<h6>Experiência</h6><?php echo $this->data->experience->exp;?> / <?php echo $this->data->experience->exp_to_next_level;?>">
+						<div class="barra-exp" style="width:<?php echo $this->data->experience->exp_percent;?>%"></div>
+					</div>
+				</li>
+			</ul>
+			<?php endif;?>
+			<div class="clearfix"></div>
+			<?php if($this->data->aditional_info->minibio != ''):?>
+				<div class="minibio">
+					<?php echo nl2br($this->data->aditional_info->minibio);?>
+				</div>
+			<?php endif;?>
+			<div class="clearfix"></div>						
+		</div>
+		<?php if($this->data->its_me or $this->data->privacy->profile == 0 or ($this->data->privacy->profile==1 && $this->data->friendship_status === '1' )):?>
+			<?php if($this->data->aditional_info->address != '' || $this->data->aditional_info->telephone != '' || $this->data->aditional_info->profession != ''):?>
+			<h2>Outros dados</h2>
+				<div class="perfil-usuario alt perfil">
+					<ul>
+						<?php if($this->data->aditional_info->address != ''):?>
+							<li><span class="titulo">Cidade:</span><span class="conteudo"><?php echo $this->data->aditional_info->address;?></span><div class="clearfix" /></li>
+						<?php endif;?>
+						<?php if($this->data->aditional_info->telephone != ''):?>
+							<li><span class="titulo">Telefone:</span><span class="conteudo"><?php echo $this->data->aditional_info->telephone;?></span><div class="clearfix" /></li>
+						<?php endif;?>
+						<?php if($this->data->aditional_info->profession != ''):?>
+							<li><span class="titulo">Profissão:</span><span class="conteudo"><?php echo $this->data->aditional_info->profession;?></span><div class="clearfix" /></li>
+						<?php endif;?>
+						<?php if($this->data->aditional_info->genre != ''):?>
+							<li><span class="titulo">Sexo:</span><span class="conteudo"><?php echo $this->data->aditional_info->genre == 'M' ? 'Masculino' : 'Feminino';?></span><div class="clearfix" /></li>
+						<?php endif;?>
+						<?php if($this->data->aditional_info->cifra_bluehand != ''):?>
+							<li><span class="titulo">Cifra Bluehand:</span><span class="conteudo"><?php echo $this->data->aditional_info->cifra_bluehand;?></span><div class="clearfix" /></li>
+						<?php endif;?>
+					</ul>
+			</div>
+			<?php endif;?>
+		<?php endif;?>
+		<div class="clearfix"></div>
+		<?php if(isset($this->data->badges) and (sizeof($this->data->badges) > 0)):?>
+			<h2>Badges</h2>
+			<ul class="badges">
+				<?php foreach($this->data->badges as $k => $badge):?>
+					<?php $current_extra_class = $this->cycleValues('', 'menor', 'sem-borda');?> 
+					<li class="badge <?php echo $current_extra_class;?>">
+						<a href="javascript:void(0);" class="tooltip " title="<h6><?php echo $badge->name;?></h6><?php echo $badge->description;?>">
+							<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo MEDIA_DIR;?>images/badges/<?php echo $badge->icon_url;?>" alt="" class="lazy" />
+							<br />
+							<span><?php echo $badge->name;?></span>
+						</a>
+					</li>
+					<?php if($current_extra_class == 'sem-borda'):?>
+						<li class="margem"></li>	
+					<?php endif;?>
+				<?php endforeach;?>
+			</ul>
+			<div class="clearfix"></div>
+			<a href="<?php echo HOST.'perfil/'.$this->data->login.'/badges';?>">ver todos ></a>
+		<?php endif;?>
+	</div>
+	<?php if($this->data->its_me or $this->data->privacy->social_network == 0 or ($this->data->privacy->social_network==1 && $this->data->friendship_status === '1' )):?>
+		<?php $qtty=0; foreach($this->data->social_networks as $each) if(! is_null($each->access_token)) $qtty++;?>
+		<?php if($qtty > 0):?>
+			<div class="box aba redes">
+				<h2>Redes</h2>
+				<ul>
+					<?php foreach($this->data->social_networks as $social_network):?>
+						<?php if(! is_null($social_network->access_token)):?>
+							<?php
+								$token = unserialize($social_network->access_token);
+								
+								$link = '';
+								if($token !== false){
+									switch($social_network->id){
+										case TWITTER:
+											$link = 'http://www.twitter.com/' . $token["screen_name"];
+											break;
+											
+										case FACEBOOK:
+											$link = 'http://www.facebook.com/' . $token->userID;
+											break;
+											
+										case YOUTUBE:
+											$link = 'http://www.youtube.com/' . $token->username;
+											break;
+											
+										case INSTAGRAM:
+											$link = 'http://instagram.com/' . json_decode($token)->user->username;
+											break;
+									}	
+								}
+								
+							?>
+							<?php if(! empty($link)):?>
+								<li>
+									<a href="<?php echo $link;?>" target="_blank">
+										<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo HOST;?>templates/default/images/socialnetworks/<?php echo strtolower($social_network->name);?>.png" alt="Sua conta do <?php echo ucfirst(strtolower($social_network->name));?> está associada" class="lazy" />
+									</a>
+								</li>
+							<?php endif;?>
+						<?php endif;?>
+					<?php endforeach;?>
+				</ul>
+			</div>
+		<?php endif;?>
+	<?php endif;?>
+	<?php if($this->data->its_me or $this->data->privacy->social_network == 0 or ($this->data->privacy->social_network==1 && $this->data->friendship_status === '1' )):?>
+		<?php if($this->data->gamertags):?>
+			<div class="box aba redes">
+				<h2>Gamer Tags</h2>
+				<ul>
+					<?php if($this->data->gamertags->psn):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/psn.png" class="tooltip north" title="<span>PlaystationNetwork:</span> <?php echo $this->data->gamertags->psn;?>" data-id="<?php echo $this->data->gamertags->psn;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->xboxlive):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/xboxlive.png" class="tooltip north" title="<span>XBoxLive:</span> <?php echo $this->data->gamertags->xboxlive;?>" data-id="<?php echo $this->data->gamertags->xboxlive;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->steam):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/steam.png" class="tooltip north" title="<span>Steam:</span> <?php echo $this->data->gamertags->steam;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->battlelog):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/bf3_battlelog.png" class="tooltip north" title="<span>Battlefield 3 BattleLog:</span> <?php echo $this->data->gamertags->battlelog;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->nuuvem):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/nuuvem.png" class="tooltip north" title="<span>Nuuvem:</span> <?php echo $this->data->gamertags->nuuvem;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->origin):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/origin.png" class="tooltip north" title="<span>Origin:</span> <?php echo $this->data->gamertags->origin;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->gamecenter):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/gamecenter.png" class="tooltip north" title="<span>Gamecenter:</span> <?php echo $this->data->gamertags->gamecenter;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->battlenet):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/battlenet.png" class="tooltip north" title="<span>Battle.net:</span> <?php echo $this->data->gamertags->battlenet;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->raptr):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/raptr.png" class="tooltip north" title="<span>Raptr:</span> <?php echo $this->data->gamertags->raptr;?>" /></li><?php endif;?>
+					<?php if($this->data->gamertags->lol):?><li><img src="<?php echo HOST;?>templates/default/images/socialnetworks/league_of_legends.png" class="tooltip north" title="<span>League of Legends:</span> <?php echo $this->data->gamertags->lol;?>" /></li><?php endif;?>
+				</ul>
+			</div>
+		<?php endif;?>
+	<?php endif;?>
+	<div class="box aba aliados">
+		<h2>Aliados (<?php echo $this->data->aditional_info->friend_count;?>)</h2>
+		<?php if(isset($this->data->friends) and (sizeof($this->data->friends) > 0)):?>
+			<ul>
+				<?php foreach($this->data->friends as $k => $user):?>
+					<?php $current_extra_class = (($k > 0) && (++$k % 4 == 0) ? 'sem-borda' : '');?>
+					<li class="<?php echo $current_extra_class.$aux_class;?> <?php echo ($k==0)?'margem-esquerda':'';?>">
+						<?php $aux_class = '';?>
+						<a href="<?php echo HOST;?>perfil/<?php echo $user->login;?>">
+							<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo MEDIA_DIR;?>images/avatar/square/<?php echo $user->avatar;?>" alt="" class="lazy" />
+							<span><?php echo $user->login;?></span>
+						</a>
+					</li>
+					<?php if($current_extra_class == 'sem-borda'):?>
+						<?php $aux_class = ' margem-esquerda';?>
+						<li class="margem"></li>	
+					<?php endif;?>
+				<?php endforeach;?>
+			</ul>
+		<?php else:?>
+			<div>
+				<img src="<?php echo MEDIA_DIR;?>images/forever-alone.png" class="lazy" />
+			</div>
+		<?php endif;?>
+		<div class="clearfix"></div>
+		<?php if(sizeof($this->data->friends) > 0):?>
+			<a href="<?php echo HOST.'perfil/'.$this->data->login.'/aliados';?>">
+				ver todos >
+			</a> 
+		<?php endif;?>
+	</div>
+	<div id='div-gpt-ad-1373046795970-3' style='width:300px; height:600px;' class="adsense skyscraper">
+		<script type='text/javascript'>
+			googletag.cmd.push(function() { googletag.display('div-gpt-ad-1373046795970-3'); });
+		</script>
+	</div>
+</div>
+<div id="conteudo" class="profile-tl">
+	<?php if($this->data->timeline):?>
+		<?php if($this->data->its_me or $this->data->privacy->posts == 0 or ($this->data->privacy->posts==1 && $this->data->friendship_status === '1' )):?>
+			<div class="info-lista alt">
+				<h3>Atividade Recente</h3>
+			</div>
+			<div id="posts-container">
+				<?php if(sizeof($this->data->timeline)):?>
+					<?php foreach($this->data->timeline as $postHTML):?>
+						<?php echo $postHTML;?>
+					<?php endforeach;?>
+				<?php endif;?>
+			</div>
+			<div class="mais-posts-container">
+				<button class='mais-posts-profile' rel="<?php echo $this->data->login;?>">CARREGAR MAIS POSTS</button>
+				<img src="<?php echo HOST;?>templates/default/images/ajax-loader.gif" />
+			</div>
+		<?php else:?>
+			<div class="info-lista alt">
+				<h3>Opa. Pera ae nerd!</h3>
+			</div>
+			<div id="posts-container">
+				<span class="warning">Aparentemente <?php echo $this->data->name;?> só compartilha algumas informações com seus aliados. Peça para ser aliado dele e poderá ver este conteúdo. Ou não.</span>
+			</div>
+		<?php endif;?>
+	<?php elseif($this->data->friends_list):?>
+		<?php if($this->data->blocked_users):?>
+			<div class="info-lista alt">
+				<h3>Usuários bloqueados</h3>
+			</div>
+			<div class="blocked-users-container">
+				<ul class="lista-de-aliados bloqueados">
+					<?php foreach($this->data->blocked_users as $user):?>
+						<li>
+							<a href="<?php echo HOST.'perfil/'.$user->login;?>">
+								<img src="<?php echo MEDIA_DIR;?>images/avatar/small/<?php echo $user->avatar;?>" class="lazy" />
+							</a>
+							<h4><?php echo $user->login;?></h4>
+							<h5><a href="<?php echo HOST.'perfil/'.$user->login;?>"><?php echo $user->name;?></a></h5>
+							<span>
+								<button ref="<?php echo $user->id;?>" class="allow-friendship-request">Desbloquear usuário</button>
+							</span>
+						</li>
+					<?php endforeach;?>
+				</ul>
+			</div>
+			<br />
+		<?php endif;?>
+		<div class="info-lista alt">
+			<?php if($this->data->friendship_status):?>
+				<h3>Aliados de <?php echo $this->data->name;?> (<?php echo $this->data->aditional_info->friend_count;?>)</h3>
+			<?php else:?>
+				<h3>Meus aliados (<?php echo $this->data->aditional_info->friend_count;?>)</h3>
+			<?php endif;?>
+		</div>
+		<div class="aliados-container">
+			<ul class="lista-de-aliados aliados">
+				<?php foreach($this->data->friends_list as $friend):?>
+					<li>
+						<a href="<?php echo HOST.'perfil/'.$friend->login;?>">
+							<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo MEDIA_DIR;?>images/avatar/square/<?php echo $friend->avatar;?>" class="lazy" />
+						</a>
+						<h4><?php echo $friend->login;?></h4>
+						<h5><a href="<?php echo HOST.'perfil/'.$friend->login;?>"><?php echo $friend->name;?></a></h5>
+					</li>
+				<?php endforeach;?>
+			</ul>
+			<div class="mais-posts-container">
+				<button class="load-more-allies" data-login="<?php echo $this->data->login;?>" data-page="1">CARREGAR MAIS ALIADOS</button>
+				<img src="<?php echo HOST;?>templates/default/images/ajax-loader.gif" />
+			</div>
+		</div>
+	<?php elseif($this->data->badges_list):?>
+		<div class="info-lista alt">
+			<?php if($this->data->friendship_status):?>
+				<h3>Badges de <?php echo $this->data->name;?></h3>
+			<?php else:?>
+				<h3>Minhas badges</h3>
+			<?php endif;?>
+		</div>
+		<div class="badges-container">
+			<ul class="lista-de-badges">
+				<?php foreach($this->data->badges_list as $badge):?>
+					<li>
+						<img src="<?php echo MEDIA_DIR;?>images/badges/<?php echo $badge->icon_url;?>" width="150" height="152" />
+						<h4><?php echo $badge->name;?></h4>
+						<p><?php echo $badge->description;?></p>
+					</li>
+				<?php endforeach;?>
+			</ul>
+			<div class="clearfix"></div>
+		</div>
+	<?php else:?>	
+		<div class="info-lista alt">
+			<h3>Atividade Recente</h3>
+		</div>
+		<div id="posts-container">
+			<span class="warning">Ops. Aparentemente <b><?php echo $this->data->login;?></b> ainda não postou nada. Incentive este usuário a interagir com outros nerds.</span> 
+		</div>
+	<?php endif;?>
+</div>
+<div class="clearfix"></div>

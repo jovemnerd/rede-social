@@ -1,0 +1,52 @@
+<?php if($this->isReply == false):?><div class="margem-comentario"></div><?php endif;?>
+<div class="comentario <?php echo ($this->isReply) ? 'resposta': '';?> replies_<?php echo ($this->in_reply_to) ? $this->in_reply_to : $this->id;?>">
+	<?php if($this->isReply == true):?><div class="margem-resposta"></div><?php endif;?>
+	<a class="apagar comentario" rel="<?php echo $this->id;?>" href="javascript:void(0);">X</a>
+	<?php if(! ($this->isReply)):?>
+		<span class="numeroComentario"></span>
+	<?php endif;?>
+	<span class="dados">
+		<span><a href="<?php echo HOST.'perfil/'.$this->user;?>"><?php echo $this->user;?></a> <?php echo ($this->isReply) ? 'responde': 'diz';?>:</span>
+	</span>
+	<div class="data">agora</div>
+	<div class="textoUsuario">
+		<p>
+			<?php
+				$comment = preg_replace('/(?<=|(?<=[.A-Za-z0-9_-]))@([.A-Za-z0-9_-]+[.A-Za-z0-9_-]+)/', '<a class="profile-link" href="'.HOST.'perfil/$1"e>@$1</a>', $this->comment);
+				$comment = trim($comment);
+				echo nl2br($comment);
+			?>
+		</p>
+	</div>
+	<ul class="dados" rel="<?php echo $comment->id;?>">
+		<?php if($this->isReply == false):?>
+			<li class="bt-positivar"></li>
+			<li class="res-positivar">0</li>
+			<li class="bt-negativar"></li>
+			<li class="res-negativar">0</li>
+			<li class="reply"><a href="javascript:void(0);" rel="<?php echo ($this->in_reply_to) ? $this->in_reply_to : $this->id;?>">responder</a></li>
+		<?php endif;?>
+	</ul>
+	<div class="infoComentarista">
+		<a href="<?php echo HOST.'perfil/'.$this->user;?>">
+			<img src="<?php echo AVATAR_DIR;?>square/<?php echo $this->avatar;?>" alt="" />
+		</a>
+		<ul>
+			<li class="nivel">Nv <?php echo $this->experience->current_level;?></li>
+			<li class="exp">Exp <?php echo floor((($this->experience->exp - $this->experience->exp_needed) * 100) / ($this->experience->exp_to_next_level - $this->experience->exp_needed));?>%</li>
+			<li class="hp">HP<?php echo $this->experience->hp;?></li>
+			<?php if(sizeof($this->badges)):?>
+				<li class="badges">
+					<?php foreach($this->badges as $badge):?>
+						<img src="<?php echo MEDIA_DIR;?>images/badges/<?php echo $badge->icon_url;?>"/>
+					<?php endforeach;?>
+				</li>
+			<?php endif;?>
+		</ul>
+	</div>
+	<?php if(! $this->isReply):?>
+		<div class="reply-area-container">
+			<textarea name="reply" data-post-id="<?php echo $this->post_id;?>"></textarea>
+		</div>
+	<?php endif;?>
+</div>

@@ -1,0 +1,87 @@
+<h2>Moderar comentários</h2>
+<div>
+	<form method="get" action="<?php echo HOST.URI?>">
+		<div>
+			Qual é o ID do post?
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<label for="id">Skynerd:</label>
+			<input type="text" id="id" name="id" />
+			
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			
+			<label for="wpid">Wordpress:</label>
+			<input type="text" id="wpid" name="wpid" />
+			
+			<button>Procurar</button>
+		</div>
+	</form>
+	
+	<?php if($this->post):?>
+		<div class="post">
+			<h4><?php echo $this->post->title;?></h4>
+			<div class="content">
+				<?php echo $this->post->content;?>
+			</div>
+			<div class="info">
+				<ul>
+					<li class="megabogas"><?php echo ($this->post->like_count == 0) ? 'NENHUM' : $this->post->like_count;?> MEGABOGA<?php echo ($this->post->like_count == 0) ? '' : 'S';?></li>
+					<li class="whatevers"><?php echo ($this->post->dislike_count == 0) ? 'NENHUM' : $this->post->dislike_count;?> WHATEVER<?php echo ($this->post->dislike_count == 0) ? '' : 'S';?></li>
+					<li class="comments"><?php echo ($this->post->comment_count == 0) ? 'NENHUM' : $this->post->comment_count;?> COMENTÁRIO<?php echo ($this->post->comment_count == 0) ? '' : 'S';?></li>
+				</ul>
+			</div>
+			
+			<br />
+		
+			<div class="comentarios">
+				<?php	$idx = 0;?>
+				<?php foreach($this->comments as $k => $comment):?>
+					<?php $classname = ($idx % 2 == 0) ? 'cinza' : '';?>
+					<div class="comment <?php echo $classname;?>">
+						<span class="index">
+							<?php echo ++$idx;?>
+						</span>
+						<div class="text">
+							<p><?php echo nl2br($comment->comment);?></p>
+						</div>
+						<div class="info">
+							<ul>
+								<li class="megabogas"><?php echo ($comment->like_count == 0) ? 'NENHUM' : $comment->comment_count;?> MEGABOGA<?php echo ($comment->like_count == 0) ? '' : 'S';?></li>
+								<li class="whatevers"><?php echo ($comment->dislike_count == 0) ? 'NENHUM' : $comment->comment_count;?> WHATEVER<?php echo ($comment->dislike_count == 0) ? '' : 'S';?></li>
+								<li class="promote"><a href="<?php echo HOST;?>adm/moderar-comentarios/apagar-comentario?id=<?php echo $comment->id;?>&pid=<?php echo $this->pid;?>&wpid=<?php echo $this->wpid;?>">APAGAR COMENTÁRIO</a></li>
+							</ul>
+						</div>
+						<div class="user">
+							<a href="<?php echo HOST.'perfil/'.$comment->user->login;?>">
+								<img src="<?php echo AVATAR_DIR;?>square/<?php echo $comment->user->avatar;?>" alt="" />
+								<div class="clear"></div>
+								<span><?php echo $comment->user->login;?></span>
+							</a>
+						</div>
+					</div>
+					<?php if(sizeof($comment->replies)):?>
+						<?php foreach($comment->replies as $reply):?>
+							<div class="comment reply <?php echo $classname;?>">
+								<div class="text">
+									<p><?php echo nl2br($reply->comment);?></p>
+								</div>
+								<div class="info">
+									<ul>
+										<li></li>
+										<li class="promote"><a href="<?php echo HOST;?>adm/moderar-comentarios/apagar-resposta?id=<?php echo $reply->id;?>&pid=<?php echo $this->pid;?>&wpid=<?php echo $this->wpid;?>">APAGAR RESPOSTA</a></li>
+									</ul>
+								</div>
+								<div class="user">
+									<a href="<?php echo HOST.'perfil/'.$reply->user->login;?>">
+										<img src="<?php echo AVATAR_DIR;?>square/<?php echo $reply->user->avatar;?>" alt="" />
+										<div class="clear"></div>
+										<span><?php echo $reply->user->login;?></span>
+									</a>
+								</div>
+							</div>
+						<?php endforeach;?>
+					<?php endif;?>
+					<?php endforeach;?>
+			</div>
+		</div>
+	<?php endif;?>
+</div>

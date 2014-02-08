@@ -1,0 +1,154 @@
+<div id="conteudo">
+	<h2 class="aba">Login</h2>
+	<p>Lambda! Lambda! Lambda! Nerds! Já fez seu login hoje? Compartilhe suas nerdices com todos seus aliados nerds! Forever Alone nunca mais!</p>
+	<span class="ilustra-nerdinho"></span>
+	<div class="box-login">
+		<h3>Faça login <span>e aproveite!</span></h3>
+		<form method="post" action="<?php echo HOST;?>login/proccess">
+			<input type="hidden" name="next" id="next" value="<?php echo $this->next;?>" />
+			<fieldset>
+				<legend>Login</legend>
+				<div>
+					<label for="username">Usuário/Email:</label>
+					<input type="text" name="username" id="username" />
+				</div>
+				<div>
+					<label for="password">Senha:</label>
+					<input type="password" name="password" id="password" />
+				</div>
+				<div>
+					<input type="submit" value="Entrar" />
+				</div>
+				<div>
+					<span class="texto-cadastre-se"><a href="<?php echo HOST;?>cadastre-se">Quero me cadastrar</a></span>
+				</div>
+				<div>
+					<span class="texto-esqueci_senha"><a href="<?php echo HOST;?>esqueci-minha-senha">Esqueci minha senha</a></span>
+				</div>
+				<div>
+					<input type="checkbox" value="1" name="keep_me_logged_in" id="keep_me_logged_in" />
+					<label for="keep_me_logged_in">Mantenha-me conectado</label>
+					<span class="finalmente">(FINALMENTE!!!)</span>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+<!--
+<div id="publicidadeLogin">
+	
+</div>
+-->
+<div id='div-gpt-ad-1373046795970-5' style='width:300px; height:250px;' class="adsense rectangle publicidadeLogin">
+<script type='text/javascript'>
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1373046795970-5'); });
+</script>
+</div>
+
+<?php if($this->message != ''):?>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			<?php switch($this->message):
+					case 'LoginError':?>
+						var htmlStr = ""
+						+ "<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>"
+						+ "		<div style='float:left;'><h1>Vish nerd, deu um problema no seu login</h1></div>"
+						+ "		<div class='clearfix'></div>"
+						+ "		<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>"
+						+ "			Não encontramos uma combinação de usuário e senha para os dados que você nos informou. Tem certeza que digitou certinho?"
+						+ "		</div>"
+						+ "</div>"
+						+ "<div class='clearfix'></div>"
+						+ "<div style='text-align:right;width:530px;margin-top:10px;'>"
+						+ "		<button class='cancel'>Beleza, valeu. Agora fecha isso</button>"
+						+ "</div>";
+			<?php 		break;
+					case 'InvalidToken':?>
+						var htmlStr = ""
+						+ "<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>"
+						+ "		<div style='float:left;'><h1>Nerd, ocorreu um problema...</h1></div>"
+						+ "		<div class='clearfix'></div>"
+						+ "		<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>"
+						+ "			Ou o token está inválido ou já expirou. Solicite outra troca de senha :)"
+						+ "		</div>"
+						+ "</div>"
+						+ "<div class='clearfix'></div>"
+						+ "<div style='text-align:right;width:530px;margin-top:10px;'>"
+						+ "		<button class='cancel'>Beleza, valeu. Agora fecha isso</button>"
+						+ "</div>";
+			<?php 		break;
+					case 'PasswordChanged':?>
+						var htmlStr = ""
+						+ "<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>"
+						+ "		<div style='float:left;'><h1>Olha que maneiro!</h1></div>"
+						+ "		<div class='clearfix'></div>"
+						+ "		<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>"
+						+ "			Sua senha foi alterada, nerd. Já está valendo a partir de agora!"
+						+ "		</div>"
+						+ "</div>"
+						+ "<div class='clearfix'></div>"
+						+ "<div style='text-align:right;width:530px;margin-top:10px;'>"
+						+ "		<button class='cancel'>Beleza, valeu. Agora fecha isso</button>"
+						+ "</div>";
+			<?php 		break;
+					case 'ResetPasswordMailNotSent':
+					case 'PasswordNotChanged':?>
+					var htmlStr = ""
+						+ "<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>"
+						+ "		<div style='float:left;'><h1>Ooops, algo deu errado!</h1></div>"
+						+ "		<div class='clearfix'></div>"
+						+ "		<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>"
+						+ "			Nerd, a troca da sua senha não procedeu como esperado. Tente novamente daqui a pouco :)"
+						+ "		</div>"
+						+ "</div>"
+						+ "<div class='clearfix'></div>"
+						+ "<div style='text-align:right;width:530px;margin-top:10px;'>"
+						+ "		<button class='cancel'>Beleza, valeu. Agora fecha isso</button>"
+						+ "</div>";
+			<?php 		break;
+					case 'PasswordChangeEmailSent':?>
+					var htmlStr = ""
+						+ "<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>"
+						+ "		<div style='float:left;'><h1>Nerd, verifique sua caixa de entrada!</h1></div>"
+						+ "		<div class='clearfix'></div>"
+						+ "		<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>"
+						+ "			Enviamos um email com as instruções para troca de senha para o seu email. O processo terá continuidade de lá! Não se esqueça que o link enviado expira hoje, às 23:59!"
+						+ "		</div>"
+						+ "</div>"
+						+ "<div class='clearfix'></div>"
+						+ "<div style='text-align:right;width:530px;margin-top:10px;'>"
+						+ "		<button class='cancel'>Beleza, valeu. Agora fecha isso</button>"
+						+ "</div>";
+			<?php 		break;
+					case 'BannedLogin':?>
+					var htmlStr = ""
+						+ "<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>"
+						+ "		<div style='float:left;'><h1>Oooops</h1></div>"
+						+ "		<div class='clearfix'></div>"
+						+ "		<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>"
+						+ "			Nerd, seu perfil chegou a 0 hit points e não resistiu."
+						+ "		</div>"
+						+ "</div>"
+						+ "<div class='clearfix'></div>"
+						+ "<div style='text-align:right;width:530px;margin-top:10px;'>"
+						+ "		<button class='cancel'>Beleza, valeu. Agora fecha isso</button>"
+						+ "</div>";
+			<?php 		break;?>
+			<?php endswitch;?>
+			
+			if(htmlStr && htmlStr.length > 0){
+				$("#overlay .content").html(htmlStr).css({"margin-left": -265});
+				$("#overlay").fadeIn('slow');
+				
+				
+				$("#overlay .background, #overlay .cancel").click(function(){
+					$("#overlay").fadeOut('slow');
+				})
+				
+				setTimeout(function(){
+					$("#overlay").fadeOut("slow");	
+				}, 10000);
+			}
+		});
+	</script>
+<?php endif;?>

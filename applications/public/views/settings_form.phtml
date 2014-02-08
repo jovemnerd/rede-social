@@ -1,0 +1,457 @@
+<div class="subcontainer pagina-configuracoes">
+	<div class="column">
+		<div class="box profile">
+			<h3>Perfil</h3>
+			<div>
+				<form method="post" action="" class="profile" id="profile_data_form">
+					<img src="<?php echo MEDIA_DIR;?>images/avatar/small/<?php echo $this->data->aditional_info->avatar;?>" alt="" id="avatar" class="feed-avatar-image lazy" />
+					<fieldset>
+						<div>
+							<label for="nome">Nome:</label>
+							<input type="text" id="nome" name="nome" value="<?php echo $this->data->name;?>" />
+						</div>
+						<div>
+							<label for="cidade">Cidade:</label>
+							<input type="text" id="cidade" name="cidade" value="<?php echo $this->data->aditional_info->address;?>" />
+						</div>
+						<div>
+							<label for="telefone">Telefone:</label>
+							<input type="text" id="telefone" name="telefone" value="<?php echo $this->data->aditional_info->telephone;?>" />
+						</div>
+						<div>
+							<label for="profissao">Profissão:</label>
+							<input type="text" id="profissao" name="profissao" value="<?php echo $this->data->aditional_info->profession;?>" />
+						</div>
+						<div>
+							<label for="bluehand">PBh:</label>
+							<input type="text" id="bluehand" name="bluehand" value="<?php echo $this->data->aditional_info->cifra_bluehand;?>" />
+						</div>
+						<div>
+							<label for="sexo">Sexo:</label>
+							<input type="radio" name="sexo" id="sexo_m" value="M" <?php if($this->data->aditional_info->genre == 'M') echo "checked";?>/>
+							<label for="sexo_m">M</label>
+							<input type="radio" name="sexo" id="sexo_f" value="F" <?php if($this->data->aditional_info->genre == 'F') echo "checked";?>/>
+							<label for="sexo_f">F</label>
+						</div>
+						<div>
+							<label for="minibio">Minibio:</label>
+							<textarea id="minibio" name="minibio"><?php echo $this->data->aditional_info->minibio;?></textarea>
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="green">
+				<h4>Para <span>redefinir sua senha,</span> utilize os campos abaixo</h4>
+				<form id="profile_acess_data_form">
+					<fieldset>
+						<div>
+							<label for="email">Email:</label>
+							<span><?php echo $this->data->email;?></span>
+						</div>
+						<div>
+							<label for="current_password">Senha atual:</label>
+							<input type="password" id="current_password" name="password" />
+						</div>
+						<div>
+							<label for="new_password">Nova senha:</label>
+							<input type="password" id="new_password" name="new_password" />
+							
+							<label for="new_password_confirm">Confirmação:</label>
+							<input type="password" id="new_password_confirm" name="new_password_confirm" />
+						</div>
+					</fieldset>
+				</form>
+			</div>
+			<div class="black">
+				<button id="save_profile_info_access">Salvar alterações</button>
+			</div>
+		</div>
+		<div class="box notifications">
+			<h3>Notificações</h3>
+			<div>
+				<p>Enviamos notificações sempre que ações envolvendo você são tomadas.</p>
+				<p>Aqui você pode escolher quais são as ações que você será notificado.</p>
+				<h4>Quero ser notificado quando:</h4>
+				<form id="frm_notification">
+					<ul>
+						<li>
+							<label for="notif_badge">Eu ganhar um badge</label>
+							<input type="checkbox" name="notification_type[]" value="1" id="notif_badge" <?php if(in_array('1', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_post_megaboga">Um dos meus posts receber um MEGABOGA</label>
+							<input type="checkbox" name="notification_type[]" value="2" id="notif_post_megaboga" <?php if(in_array('2', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_post_wtv">Um dos meus posts receber um WHATEVER</label>
+							<input type="checkbox" name="notification_type[]" value="3" id="notif_post_wtv" <?php if(in_array('3', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_post_fav">Um dos meus posts ser FAVORITADO</label>
+							<input type="checkbox" name="notification_type[]" value="11" id="notif_post_fav" <?php if(in_array('11', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_post_comment">Um dos meus posts receber um COMENTÁRIO</label>
+							<input type="checkbox" name="notification_type[]" value="6" id="notif_post_comment" <?php if(in_array('6', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_comment_mbg">Um comentário que fiz receber um MEGABOGA</label>
+							<input type="checkbox" name="notification_type[]" value="4" id="notif_comment_mbg" <?php if(in_array('4', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_comment_wtv">Um comentário que fiz receber um WHATEVER</label>
+							<input type="checkbox" name="notification_type[]" value="5" id="notif_comment_wtv" <?php if(in_array('5', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_comment_reply">Um comentário que fiz ser respondido</label>
+							<input type="checkbox" name="notification_type[]" value="7" id="notif_comment_reply" <?php if(in_array('7', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_level_up">Eu subir de nível</label>
+							<input type="checkbox" name="notification_type[]" value="8" id="notif_level_up" <?php if(in_array('8', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_ally_chg_avatar">Um aliado trocar de avatar</label>
+							<input type="checkbox" name="notification_type[]" value="9" id="notif_ally_chg_avatar" <?php if(in_array('9', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_tagged_in_post">Eu for marcado em um post</label>
+							<input type="checkbox" name="notification_type[]" value="12" id="notif_tagged_in_post" <?php if(in_array('12', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_tagged_in_comment">Eu for marcado em um comentário</label>
+							<input type="checkbox" name="notification_type[]" value="13" id="notif_tagged_in_comment" <?php if(in_array('13', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_befriended">Um pedido de amizade que fiz for aceito</label>
+							<input type="checkbox" name="notification_type[]" value="10" id="notif_befriended" <?php if(in_array('10', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+						<li>
+							<label for="notif_reblog">Um dos meus posts ser REBLOGADO</label>
+							<input type="checkbox" name="notification_type[]" value="14" id="notif_reblog" <?php if(in_array('14', $this->notification_settings)) echo 'checked="checked"';?> />
+						</li>
+					</ul>
+				</form>
+			</div>
+			<div class="black">
+				<button id="save_notification_settings">Salvar alterações</button>
+			</div>
+		</div>
+		<div class="box account-options">
+			<h3>Opções da conta</h3>
+			<div>
+				<form id="formAccountOptions">
+					<ul>
+						<li>
+							<label for="show_nsfw">Exibir posts marcados como <span class="tooltip right" title="<h6>NSFW</h6>NSFW é uma abreviação do termo inglês &quot;Not Safe for Work&quot; que significa &quot;Não seguro para o trabalho&quot;. Ou seja, posts marcados com essa tag não apresentam conteúdo adequado para serem vistos em público.">NSFW</span></label>
+							<input type="checkbox" name="show_nsfw" value="1" id="show_nsfw" <?php if($this->data->aditional_info->show_nsfw == "1") echo 'checked="checked"';?> />
+						</li>
+					</ul>
+				</form>
+			</div>
+			<div class="black">
+				<button id="save_account_options">Salvar alterações</button>
+			</div>
+			<div>
+				<a href="<?php echo HOST;?>perfil/configuracoes/cancelar-conta">Quero cancelar minha conta</a>
+			</div>
+		</div>
+	</div>
+	<div class="column">
+		<div class="box privacy">
+			<h3>Privacidade</h3>
+			<div class="transparent">
+				<form id="frm_privacy">
+					<fieldset>
+						<ul>
+							<li>
+								<h4>Perfil</h4>
+								<input type="radio" name="profile" id="profile_private" value="1" <?php echo ($this->data->privacy->profile == '1') ? 'checked="checked"':'';?> />
+								<label for="profile_private">Apenas aliados</label>
+								<input type="radio" name="profile" id="profile_public" value="0" <?php echo ($this->data->privacy->profile == '0') ? 'checked="checked"':'';?> />
+								<label for="profile_public">Todos</label>
+							</li>
+							<li>
+								<h4>Redes Sociais / GamerTags</h4>
+								<input type="radio" name="social_network" value="1" id="social_network_pvt" <?php echo ($this->data->privacy->social_network == '1') ? 'checked="checked"':'';?> />
+								<label for="social_network_pvt">Apenas aliados</label>
+								<input type="radio" name="social_network" value="0" id="social_network_public" <?php echo ($this->data->privacy->social_network == '0') ? 'checked="checked"':'';?>/>
+								<label for="social_network_public">Todos</label>
+							</li>
+							<li>
+								<h4>Posts</h4>
+								<input type="radio" name="posts" value="1" id="posts_public" <?php echo ($this->data->privacy->posts == '1') ? 'checked="checked"':'';?> />
+								<label for="posts_public">Apenas aliados</label>
+								<input type="radio" name="posts" value="0" id="posts_private" <?php echo ($this->data->privacy->posts == '0') ? 'checked="checked"':'';?> />
+								<label for="posts_private">Todos</label>
+							</li>
+							<li>
+								<h4>Status</h4>
+								<input type="radio" name="stats" value="1" id="stats_private" <?php echo ($this->data->privacy->stats == '1') ? 'checked="checked"':'';?> />
+								<label for="stats_private">Apenas aliados</label>
+								<input type="radio" name="stats" value="0" id="stats_public" <?php echo ($this->data->privacy->stats == '0') ? 'checked="checked"':'';?>/>
+								<label for="stats_public">Todos</label>
+							</li>
+						</ul>
+					</fieldset>
+				</form>
+			</div>
+			<div class="black">
+				<button id="save_privacy">Salvar alterações</button>
+			</div>
+		</div>
+		<div class="box lists">
+			<h3>Listas</h3>
+			<div>
+				<div class="column">
+					<h4>Adicionar <span>nova lista</span></h4>
+					<form>
+						<input type="text" value="Título" name="list_title" id="list_title" />
+						<a href="javascript:void(0);" data-target="categories" class="toggle-content">Categorias</a>
+						<a href="javascript:void(0);" data-target="social-networks" class="toggle-content">Redes Sociais</a>
+						<span class="list_error"></span>
+						<!--<a href="javascript:void(0);" data-target="jovemnerd-content" class="toggle-content">Conteúdo Jovem Nerd</a>-->
+					</form>
+					<div class="black">
+						<button id="create_new_list">Criar nova lista</button>
+					</div>
+				</div>
+				<div class="column">
+					<div id="categories" class="hidden">
+						<h4>Categorias</h4>
+						<ul>
+							<?php foreach($this->categories as $category):?>
+								<li>
+									<input type="checkbox" value="<?php echo $category->id;?>" name="new_list_categories[]" id="new_list_category_<?php echo $category->id;?>" class="new_list_categories" />
+									<label for="new_list_category_<?php echo $category->id;?>"><?php echo $category->name;?></label>
+								</li>
+							<?php endforeach;?>
+						</ul>
+						<button>OK</button>
+					</div>
+					<div id="social-networks" class="hidden">
+						<h4>Redes Sociais</h4>
+						<ul>
+							<?php foreach($this->data->social_networks as $social_network):?>
+								<?php if($social_network->access_token and $social_network->can_be_listed==1):?>
+									<li>
+										<input type="checkbox" id="sel_social_network_<?php echo $social_network->id;?>" value="<?php echo $social_network->id;?>" name="new_list_sns[]" class="new_list_social_networks" />
+										<label for="sel_social_network_<?php echo $social_network->id;?>"><?php echo $social_network->name;?></label>
+									</li>
+								<?php endif;?>
+							<?php endforeach;?>
+						</ul>
+						<button>OK</button>
+					</div>
+					<!--
+					<div id="jovemnerd-content" class="hidden">
+						<h4>Conteúdo JovemNerd</h4>
+						<button>OK</button>
+					</div>
+					-->
+					<div class="user-lists-container">
+						<?php if(is_array($this->lists) && sizeof($this->lists)):?>
+							<a href="javascript:void(0);" class="list-name">Nome da lista</a>
+							<ul class="list-content"></ul>
+							<ul class="user-lists">
+								<?php foreach($this->lists as $list):?>
+									<li><a href="javascript:void(0);" data-content='<?php echo json_encode($list);?>'><?php echo $list->name;?></a></li>
+								<?php endforeach;?>
+							</ul>
+						<?php endif;?>
+					</div>
+					<?php if(is_array($this->lists) && sizeof($this->lists)):?>
+						<button id="delete-list">Excluir Lista</button>
+					<?php endif;?>
+				</div>
+			</div>
+		</div>
+		<div class="box social-networks">
+			<h3>Redes sociais</h3>
+			<div>
+				<ul>
+					<?php foreach($this->data->social_networks as $social_network):?>
+						<?php if($social_network->access_token && $social_network->active == 1):?>
+							<li>
+								<img src="<?php echo HOST;?>templates/default/images/socialnetworks/<?php echo strtolower($social_network->name);?>.png" alt="Sua conta do <?php echo ucfirst(strtolower($social_network->name));?> está associada" />
+								<a class="unlink" href="<?php echo HOST;?>meu-perfil/redes-sociais/<?php echo strtolower($social_network->name);?>/logout"></a>		
+							</li>
+						<?php else:?>
+							<li>
+								<?php if($social_network->external_link == "1"):?>
+									<a href="<?php echo HOST;?>meu-perfil/redes-sociais/<?php echo strtolower($social_network->name);?>/login" class="link">
+								<?php else:?>
+									<a href="#<?php echo strtolower($social_network->name);?>" id="<?php echo strtolower($social_network->name);?>" class="link">
+								<?php endif;?>
+									<img src="<?php echo HOST;?>templates/default/images/socialnetworks/<?php echo strtolower($social_network->name);?>_pb.png" alt="Associar conta <?php echo ucfirst(strtolower($social_network->name));?>" />
+								</a>
+							</li>
+						<?php endif;?>
+					<?php endforeach;?>
+				</ul>
+			</div>
+			<?php if($this->data->social_networks[SocialNetwork::TWITTER]->active==1 or $this->data->social_networks[SocialNetwork::FACEBOOK]->active==1):?>
+				<div>
+					<form id="frm_social_networks_options">
+						<?php if($this->data->social_networks[SocialNetwork::FACEBOOK]->active == 1):?>
+							<h4>Facebook</h4>
+							<ul>
+								<li>
+									<label for="fb_auto_share" class="tooltip" title="Quando marcado, por padrão, a opção de compartilhamento dos seus posts no Facebook será marcada automaticamente">Compartilhar automaticamente meus posts</label>
+									<input type="checkbox" name="facebook_options[auto_share]" value="1" id="fb_auto_share" <?php if($this->data->social_networks[SocialNetwork::FACEBOOK]->options->auto_share == "1") echo 'checked="checked"';?> />
+								</li>
+								<li>
+									<label for="fb_badge">Compartilhar na minha conta quando eu ganhar um badge</label>
+									<input type="checkbox" name="facebook_options[badges]" value="1" id="fb_badge" <?php if($this->data->social_networks[SocialNetwork::FACEBOOK]->options->badges == "1") echo 'checked="checked"';?> />
+								</li>
+							</ul>
+						<?php endif;?>
+						<?php if($this->data->social_networks[SocialNetwork::TWITTER]->active == 1):?>
+							<h4>Twitter</h4>
+							<ul>
+								<li>
+									<label for="twt_auto_share" class="tooltip" title="Quando marcado, por padrão, a opção de compartilhamento dos seus posts no Twitter será marcada automaticamente">Compartilhar automaticamente meus posts</label>
+									<input type="checkbox" name="twitter_options[auto_share]" value="1" id="twt_auto_share" <?php if($this->data->social_networks[SocialNetwork::TWITTER]->options->auto_share == "1") echo 'checked="checked"';?> />
+								</li>
+								<li>
+									<label for="twt_facebook">Compartilhar na minha conta quando eu ganhar um badge</label>
+									<input type="checkbox" name="twitter_options[badges]" value="1" id="twt_facebook" <?php if($this->data->social_networks[SocialNetwork::TWITTER]->options->badges == "1") echo 'checked="checked"';?> />
+								</li>
+							</ul>
+						<?php endif;?>
+					</form>
+				</div>
+				<div class="black">
+					<button id="save_social_network_options">Salvar alterações</button>
+				</div>
+			<?php endif;?>
+		</div>
+		<div class="box gamer-tags">
+			<h3>Gamer Tags</h3>
+			<div>
+				<form id="frm_gamertags">
+					<ul>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/psn.png" class="tooltip north" title="PlaystationNetwork" />
+							<input type="text" name="gamertags[psn]" value="<?php echo $this->data->gamertags->psn;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/xboxlive.png" class="tooltip north" title="XBoxLive" />
+							<input type="text" name="gamertags[xboxlive]" value="<?php echo $this->data->gamertags->xboxlive;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/steam.png" class="tooltip north" title="Steam" />
+							<input type="text" name="gamertags[steam]" value="<?php echo $this->data->gamertags->steam;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/bf3_battlelog.png" class="tooltip north" title="Battlefield 3 BattleLog" />
+							<input type="text" name="gamertags[battlelog]" value="<?php echo $this->data->gamertags->battlelog;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/nuuvem.png" class="tooltip north" title="Nuuvem" />
+							<input type="text" name="gamertags[nuuvem]" value="<?php echo $this->data->gamertags->nuuvem;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/origin.png" class="tooltip north" title="Origin" />
+							<input type="text" name="gamertags[origin]" value="<?php echo $this->data->gamertags->origin;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/gamecenter.png" class="tooltip north" title="Gamecenter" />
+							<input type="text" name="gamertags[gamecenter]" value="<?php echo $this->data->gamertags->gamecenter;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/battlenet.png" class="tooltip north" title="Battle.net" />
+							<input type="text" name="gamertags[battlenet]" value="<?php echo $this->data->gamertags->battlenet;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/raptr.png" class="tooltip north" title="Raptr" />
+							<input type="text" name="gamertags[raptr]" value="<?php echo $this->data->gamertags->raptr;?>" />
+						</li>
+						<li>
+							<img src="<?php echo HOST;?>templates/default/images/socialnetworks/league_of_legends.png" class="tooltip north" title="League of Legends" />
+							<input type="text" name="gamertags[lol]" value="<?php echo $this->data->gamertags->lol;?>" />
+						</li>
+					</ul>
+				</form>
+			</div>
+			<div class="black">
+				<button id="save_gamertags">Salvar alterações</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="display:none;">
+	<div id="blog-overlay">
+		<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>
+			<div style='float:left;'><h1>Nerd, qual é o endereço de email que você utiliza para comentar os posts no blog?</h1></div>
+			<div class='clearfix'></div>
+			<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>
+				<div>Enviaremos um email de confirmação para você associar a sua conta no email informado.</div>
+				<div>
+					<label for="blog-email-account">Endereço de email:</label>
+					<input type="text" id="blog-email-account" name="blog-email-account" />
+				</div>
+			</div>
+			<div>
+				<span style="text-align:right;font-size:0.4em;width:auto;line-height:0.9em;padding-top:10px;">Se você já pediu a solicitação de vínculo e ainda não recebeu o email de confirmação, adicione uma exceção para o domínio jovemnerd.com.br nas suas configurações anti-spam.</span>
+				<div class='clearfix'></div>				
+			</div>
+		</div>
+		<div class='clearfix'></div>
+		<div style='text-align:right;width:530px;margin-top:10px;' class="jovemnerd-blog-msg-wrapper">
+			<button class='link-blog-account'>Beleza, manda o email aí.</button>
+			<button class='cancel'>Cancela isso</button>
+		</div>
+	</div>
+	<div id="nerdtrack-overlay">
+		<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>
+			<div style='float:left;'><h1>Nerd, tem conta na Nerdtrack? Qual o email?</h1></div>
+			<div class='clearfix'></div>
+			<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>
+				<div>Enviaremos um email de confirmação para você associar a sua conta no email informado.</div>
+				<div>
+					<label for="nerdtrack-email-account">Endereço de email:</label>
+					<input type="text" id="nerdtrack-email-account" name="nerdtrack-email-account" />
+				</div>
+			</div>
+			<div>
+				<span style="text-align:right;font-size:0.4em;width:auto;line-height:0.9em;padding-top:10px;">Se você já pediu a solicitação de vínculo e ainda não recebeu o email de confirmação, adicione uma exceção para o domínio jovemnerd.com.br nas suas configurações anti-spam.</span>
+				<div class='clearfix'></div>				
+			</div>
+		</div>
+		<div class='clearfix'></div>
+		<div style='text-align:right;width:530px;margin-top:10px;' class="nerdtrack-msg-wrapper">
+			<button class='link-nerdtrack-account'>Beleza, manda o email aí.</button>
+			<button class='cancel'>Cancela isso</button>
+		</div>
+	</div>
+	<div id="nerdstore-overlay">
+		<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>
+			<div style='float:left;'><h1>Tem conta na nerdstore? Qual o email?</h1></div>
+			<div class='clearfix'></div>
+			<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica,Arial;text-transform: none;margin-top:15px;'>
+				<div>Enviaremos um email de confirmação para você associar a sua conta no email informado.</div>
+				<div>
+					<label for="nerdstore-email-account">Endereço de email:</label>
+					<input type="text" id="nerdstore-email-account" name="nerdstore-email-account" />
+				</div>
+			</div>
+			<div>
+				<span style="text-align:right;font-size:0.4em;width:auto;line-height:0.9em;padding-top:10px;">Se você já pediu a solicitação de vínculo e ainda não recebeu o email de confirmação, adicione uma exceção para o domínio jovemnerd.com.br nas suas configurações anti-spam.</span>
+				<div class='clearfix'></div>				
+			</div>
+		</div>
+		<div class='clearfix'></div>
+		<div style='text-align:right;width:530px;margin-top:10px;' class="nerdstore-msg-wrapper">
+			<button class='link-nerdstore-account'>Beleza, manda o email aí.</button>
+			<button class='cancel'>Cancela isso</button>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var FB_APP_ID = '<?php echo FACEBOOK_APPID;?>';
+	var SETTINGS_PAGE_STATUS_MESSAGE = '<?php echo $this->message;?>'
+</script>
+<script src="//connect.facebook.net/pt_BR/all.js"></script>
+<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.jscrollpane.js"></script>
+<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/settings.js"></script>

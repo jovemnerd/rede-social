@@ -1,0 +1,246 @@
+<div id="lateral">
+	<div class="box perfil">
+		<div class="perfil-usuario">
+			<div class="avatar column">
+				<img src="<?php echo MEDIA_DIR;?>images/avatar/small/<?php echo $this->data->aditional_info->avatar;?>" alt="" id="avatar" width="113" height="192" />
+				<div id="avatar-loader">
+					<iframe src="<?php echo HOST;?>perfil/configuracoes/trocar-avatar/fallback" id="new_avatar_fallback"></iframe>
+					<span>Para trocar o avatar, clique ou arraste a imagem aqui.</span>
+					<img src="<?php echo MEDIA_DIR;?>images/avatar-loader.gif" />
+					
+				</div>
+			</div>
+			<div class="dados-usuario column">
+				<h1><a href="<?php echo HOST.$this->data->login;?>"><?php echo $this->data->login;?></a></h1>
+				<ul>
+					<li><span class="titulo">Pontos de vida:</span> <span class="conteudo"><?php echo $this->data->experience->hp;?> / 10</span></li>
+					<li><span class="titulo">Ouro:</span> <span class="conteudo"><?php echo $this->data->experience->gold;?></span></li>
+					<li><span class="titulo">Nível:</span> <span class="conteudo"><?php echo $this->data->experience->current_level;?></span></li>
+					<li><span class="titulo">Experiência:</span>
+						<span class="exp-proximo-level">
+							<span class="conteudo"><?php echo $this->data->experience->exp_percent;?>%</span> 
+						</span> 
+						<div class="clearfix"></div>
+						<div class="barra-exp-container tooltip north" title="<h6>Experiência</h6><?php echo $this->data->experience->exp;?> / <?php echo $this->data->experience->exp_to_next_level;?>">
+							<div class="barra-exp" style="width:<?php echo $this->data->experience->exp_percent;?>%"></div>
+						</div>
+					</li>
+				</ul>
+				<div class="mais">
+					<a href="<?php echo HOST . 'meu-perfil'?>">perfil completo</a>
+				</div>
+			</div>
+		</div>
+		<?php if(isset($this->data->badges) and (sizeof($this->data->badges) > 0)):?>
+			<h2>Badges</h2>
+			<ul class="badges">
+				<?php foreach($this->data->badges as $k => $badge):?>
+					<?php $current_extra_class = $this->cycleValues('', 'menor', 'sem-borda');?> 
+					<li class="badge <?php echo $current_extra_class;?>">
+						<a href="javascript:void(0);" class="tooltip" title="<h6><?php echo $badge->name;?></h6><?php echo $badge->description;?>">
+							<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo MEDIA_DIR;?>images/badges/<?php echo $badge->icon_url;?>" alt="" class="lazy" />
+							<br />
+							<span><?php echo $badge->name;?></span>
+						</a>
+					</li>
+					<?php if($current_extra_class == 'sem-borda'):?>
+						<li class="margem"></li>	
+					<?php endif;?>
+				<?php endforeach;?>
+			</ul>
+			<div class="clearfix"></div>
+			<a href="<?php echo HOST;?>meu-perfil/badges">ver todos ></a>
+		<?php endif;?>
+	</div>
+	
+	<div id='div-gpt-ad-1372386456620-2' style='width:300px; height:250px;' class="adsense rectangle">
+		<script type='text/javascript'>
+			googletag.cmd.push(function() { googletag.display('div-gpt-ad-1372386456620-2'); });
+		</script>
+	</div>
+	
+	
+	<div class="box aba aliados">
+		<h2>Aliados (<?php echo $this->data->aditional_info->friend_count;?>)</h2>
+		<form action="<?php echo HOST;?>perfil/localizar-aliados" id="frm-find-friends" method="POST">
+			<fieldset>
+				<input type="text" value="Localizar aliados" />
+				<div class="resultado-busca-aliados"></div>
+			</fieldset>
+		</form>
+		<?php if(isset($this->data->friends) and (sizeof($this->data->friends) > 0)):?>
+			<ul>
+				<li class="margem"></li>
+				<?php foreach($this->data->friends as $k => $user):?>
+					<?php $current_extra_class = (($k > 0) && (++$k % 4 == 0) ? 'sem-borda' : '');?>
+					<li class="<?php echo $current_extra_class.$aux_class;?> <?php echo ($k==0)?'margem-esquerda':'';?>">
+						<?php $aux_class = '';?>
+						<a href="<?php echo HOST;?>perfil/<?php echo $user->login;?>">
+							<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo MEDIA_DIR;?>images/avatar/square/<?php echo $user->avatar;?>" alt="" class="lazy" />
+							<span><?php echo $user->login;?></span>
+						</a>
+					</li>
+					<?php if($current_extra_class == 'sem-borda'):?>
+						<?php $aux_class = ' margem-esquerda';?>
+						<li class="margem"></li>	
+					<?php endif;?>
+				<?php endforeach;?>
+			</ul>
+		<?php else:?>
+			<div>
+				<img src="<?php echo MEDIA_DIR;?>images/forever-alone.png" />
+			</div>
+		<?php endif;?>
+		<div class="clearfix"></div>
+		<?php if(sizeof($this->data->friends) > 0):?>
+			<a href="<?php echo HOST;?>meu-perfil/aliados">ver todos ></a> 
+		<?php endif;?>
+	</div>
+	<div id='div-gpt-ad-1373046795970-3' style='width:300px; height:600px;' class="adsense skyscraper">
+		<script type='text/javascript'>
+			googletag.cmd.push(function() { googletag.display('div-gpt-ad-1373046795970-3'); });
+		</script>
+	</div>
+</div>
+<div id="conteudo">
+	<div class="box-compartilhar">
+		<h3>Compartilhe</h3>
+		<form action="<?php echo HOST;?>perfil/compartilhar" method="post" id="post-form">
+			<fieldset id="post_content">
+				<input type="text" id="tituloPost" name="title" value="Título do post" />
+				<textarea name="content" id="areaPostagem"></textarea>
+				<div class="post-media-preview"></div>
+				<input type="hidden" value="0" name="post_privacy" />
+				<input type="hidden" value="1" name="post_to_twitter" />
+				<input type="hidden" value="1" name="post_to_facebook" />
+			</fieldset>
+			<div class="opcaoPost">
+				<h4 class="category">Categorize seu post, nerd!</h4>
+				<div class="container-categorias">
+					<input type="text" name="categories" id="categories" class="categories" />
+				</div>
+				<div class="sharing-wrapper">
+					<button type="submit">Compartilhar</button>
+					<ul class="options">
+						<li class="aberto tooltip north" title="<h6>Privacidade</h6><span class='cadeado aberto'></span><em>Aberto:</em> Qualquer um pode ver.<br/><span class='cadeado fechado'></span><em>Fechado:</em> Somente seus aliados podem ver.</br/>" id="post_privacy_controller">Público</li>
+						<li class="facebook <?php echo ($this->data->social_networks[SocialNetwork::FACEBOOK]->options->auto_share == 1) ? 'ativo' : 'associar';?>">Facebook</li>
+						<li class="twitter <?php echo ($this->data->social_networks[SocialNetwork::TWITTER]->options->auto_share == 1) ? 'ativo' : 'associar';?>">Twitter</li>
+					</ul>
+				</div>
+				<h4 class="error_report"></h4>
+			</div>
+		</form>
+		<div class="clearfix"></div>
+	</div>				
+	<div class="info-lista">
+		<h3>Todos os posts</h3>
+		<div>
+			<a href="javascript:void(0);">Todos os posts dos meus aliados</a>
+			<ul>
+				<li><a href="javascript:void(0);">Todos os posts dos meus aliados</a></li>
+				<li><a href="javascript:void(0);" rel="bookmarks" ref="{}">Meus posts favoritos</a></li>
+				<li><a href="javascript:void(0);" rel="all_posts" ref="{}">Todos os posts da Skynerd</a></li>
+				<?php foreach($this->lists as $list):?>
+					<li><a href="javascript:void(0);" rel="<?php echo $list->id;?>" ref='<?php echo json_encode($list);?>'><?php echo $list->name;?></a></li>
+				<?php endforeach;?>
+				<li><a href="javascript:void(0);" class="criarLista" id="create-list">Criar Lista</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="lista">
+		<div class="categorias">
+			<ul></ul>
+		</div>
+	</div>
+	<div id="new_posts_container"></div>
+	<div id="posts-container">
+		<?php
+			if($this->posts){
+				echo implode('', $this->posts);
+			}
+		?>
+	</div>
+	<div class="mais-posts-container">
+		<button class='mais-posts'>CARREGAR MAIS POSTS</button>
+		<img src="<?php echo HOST;?>templates/default/images/ajax-loader.gif" />
+	</div>
+</div>
+<div class="clearfix"></div>
+
+<script type="text/javascript">
+<?php/*
+	$(document).ready(function(){
+		
+		$("#create-list").click(function(){
+			$(".info-lista div > a").trigger("click")
+			var htmlStr = ""
+			+ "<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>"
+			+ "		<div style='float:left;'><h1>Criar nova lista</h1></div>"
+			+ "		<div class='new_list_error_alert' style='line-height:13px;font-size: 10px;color: #C00;text-align: right;font-family:Helvetica,Arial;font-weight:bold;'></div>"
+			+ "		<div class='clearfix'></div>"
+			+ "		<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica, Arial;text-transform: none;margin-top:15px;'>"
+			+ "			<label for='new_list_name'>Título da nova lista:</label>"
+			+ "			<input type='text' id='new_list_name' name='new_list_name' style='width:341px;'/>"
+			+ "		</div>"
+			+ "		<div><h2>Categorias que compõem a nova lista</h2></div>"
+			+ "		<div style='padding-left:50px;'>"
+			<?php foreach($this->categories as $category):?>
+				+ '		<span>'
+				+ '			<input type="checkbox" value="<?php echo $category->id;?>" id="new_list_category_<?php echo $category->id;?>" name="new_list_categories[]" ref="<?php echo $category->name;?>">'
+				+ '			<label for="new_list_category_<?php echo $category->id;?>"><?php echo $category->name;?></label>'
+				+ '		</span>'
+			<?php endforeach;?>
+			+ "		</div>"
+			+ "		<div class='clearfix'></div>"
+			+ "		<div><h2>Redes sociais</h2></div>"
+			+ "		<div style='padding-left:50px;'>"
+					<?php $qtty=0; foreach($this->data->social_networks as $each) if(! is_null($each->access_token)) $qtty++;?>
+					<?php if($qtty > 0):?>
+						<?php foreach($this->data->social_networks as $social_network):?>
+							<?php if($social_network->access_token and $social_network->can_be_listed==1):?>
+							+ '		<span>'
+							+ '			<input type="checkbox" value="<?php echo $social_network->id;?>" id="new_list_sn_<?php echo $social_network->id;?>" name="new_list_social_networks[]" ref="<?php echo $social_network->name;?>">'
+							+ '			<label for="new_list_sn_<?php echo $social_network->id;?>"><?php echo $social_network->name;?></label>'
+							+ '		</span>'
+							<?php endif;?>
+						<?php endforeach;?>
+					<?php else:?>
+						+ "<span style='width:auto;'>Aparentemente você ainda não tem nenhuma rede social associada com a sua conta. Para associá-las, acesse a página de <a href='<?php echo HOST;?>perfil/configuracoes'>configurações</a></span>"
+					<?php endif;?>
+			+ "		<div class='clearfix'></div>"
+			+ "		</div>"
+			+ "</div>"
+			+ "<div class='clearfix'></div>"
+			+ "<div style='text-align:right;width:530px;margin-top:10px;'>"
+			+ "		<button class='cancel'>Cliquei errado, cancela isso.</button>"
+			+ "		<button class='create-list'>Vai lá amigo, cria a lista.</button>"
+			+ "</div>";
+			
+			$("#overlay .content").html(htmlStr).css({"margin-left": -250});
+			$("#overlay").fadeIn();
+			
+			$("input[name=new_list_name]").focus();
+		});
+	});
+*/?>
+
+	<?php
+		$categories = array();
+		foreach($this->categories as $category)
+			$categories[] = $category->name;
+	?>
+	var availableCategories = '<?php echo json_encode($categories);?>';
+	
+	$("input[name=categories]").tagit({
+        availableTags: availableCategories,
+        allowSpaces: true,
+        removeConfirmation: true
+    });
+</script>
+
+<h2>DUMP</h2>
+<pre>
+<?php 
+print_r($this->categories);
+?>
+</pre>

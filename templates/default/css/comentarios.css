@@ -1,0 +1,122 @@
+#conteudo div.trigger-comentarios{background:#949494;width:550px;margin-left:80px;position:relative;}
+#conteudo div.trigger-comentarios a.qtde-comentarios {letter-spacing:0.03em;line-height:30px;display:block;color:#fff;font-family:"Engschrift";text-transform:uppercase;text-decoration:none;padding-left:30px;background:transparent url("../images/sprite-setas-sinais.png") 10px -33px no-repeat;}
+#conteudo div.trigger-comentarios a.seta-direita{background-position:11px -89px !important;}
+#conteudo div.trigger-comentarios a.obter-comentarios{position: absolute;right: 9px;top: 9px;color: #333;text-decoration: none;font-size: 12px;}
+#conteudo div.trigger-comentarios .comment-ajax-loader{position:absolute;top:10px;right:9px;display:none;}
+
+#conteudo div.comentarios {font-family:Helvetica, Arial}
+#conteudo div.comentarios div.comentario {position:relative;padding:13px 20px 15px 35px;background-color:#e5f5f6;min-height:80px;width:495px;margin-left:80px;}
+#conteudo div.comentarios div.comentario.cinza {background-color:#efefef;}
+
+#conteudo div.margem-comentario{display:block;height:4px;}
+#conteudo div.comentarios div.comentario.resposta{padding-left:30px;width:500px;}
+#conteudo div.comentarios div.comentario.resposta.cinza {background-color:#efefef;}
+
+#conteudo div.margem-resposta{position:absolute;top:0px;display:block;height:1px;background:#c5c5c5;width:510px;}
+
+#conteudo div.comentarios div.comentario span.numeroComentario {font-size:10px;background-color:#00a1a9;color:#fff;position:absolute;left:0;top:0;padding:3px;display:block;font-weight:bold;}
+#conteudo div.comentarios div.comentario > a.apagar.comentario{position: absolute;display: block;background: #00A1A9;top: 0;right: 0;color: white;font-family: Helvetica,Arial;font-size: 10px;text-decoration: none;padding: 2px;}
+#conteudo div.comentarios div.comentario > a.apagar.comentario:hover{color:black;}
+
+
+#conteudo div.comentarios div.comentario span.dados{font-size:14px;color:#00a1a9;font-family:Helvetica, Arial;}
+#conteudo div.comentarios div.comentario span.dados a{color:#00a1a9;text-decoration:none;font-weight:bold;}
+#conteudo div.comentarios div.comentario span.dados a:hover {text-decoration:underline;}
+
+#conteudo div.comentarios div.comentario ul.dados {font-size:14px;height:20px;}
+#conteudo div.comentarios div.comentario ul.dados li {display:block;position:relative;width:20px;float:left;}
+#conteudo div.comentarios div.comentario ul.dados li a {color:#00a1a9;}
+#conteudo div.comentarios div.comentario ul.dados li a:hover {text-decoration:none;}
+
+#conteudo div.comentarios div.comentario ul.dados li.reply {margin-left:10px;font-size:12px;line-height:16px;}
+
+#conteudo div.comentarios div.comentario ul.dados li[class*="bt-"]{background:transparent url("../images/sprite-thumbs.png") 0 0 no-repeat;text-indent:-9999px; width:20px; height:16px; cursor:pointer;}
+#conteudo div.comentarios div.comentario ul.dados li[class*="res-"]{height:17px;width:29px;;background:url("../images/sprite-thumbs.png") -28px -119px;text-align:center; text-indent:0; font-size:10px; color:#0293a9; font-family:Arial;padding:1px 3px;line-height:18px;}
+
+#conteudo div.comentarios div.comentario ul.dados li.bt-positivar {width:15px;background-position:-13px -121px;}
+#conteudo div.comentarios div.comentario ul.dados li.bt-negativar {width:15px;background-position:-66px -121px;top: 1px;margin-left: 10px;}
+
+#conteudo div.comentarios div.comentario ul.dados li.bt-positivar.meu-voto {background-position: -84px -120px;}
+#conteudo div.comentarios div.comentario ul.dados li.bt-negativar.meu-voto {background-position:-103px -121px;}
+
+
+#conteudo div.comentarios div.comentario div.data {color:#666;font-size:12px;margin-bottom:10px;margin-top:4px;}
+#conteudo div.comentarios div.comentario div.textoUsuario {width:400px;overflow:hidden;}
+#conteudo div.comentarios div.comentario div.textoUsuario a {color:#00a1a9;}
+#conteudo div.comentarios div.comentario div.textoUsuario a:hover {text-decoration:none;}
+#conteudo div.comentarios div.comentario div.textoUsuario p{font-size:12px;margin-bottom:10px;width:360px;color:#454545;line-height:1.2em;}
+
+#conteudo div.comentarios div.comentario div.textoUsuario a.profile-link{text-decoration:none;}
+
+
+#conteudo div.comentarios div.comentario div.infoComentarista {width:180px;position:absolute;right:10px;top:18px;text-align:right;padding:7px 0px;}
+#conteudo div.comentarios div.comentario div.infoComentarista > a > img {float:right;border:2px solid #000;margin-left:5px;}
+#conteudo div.comentarios div.comentario div.infoComentarista ul {float:right;margin-top:6px;}
+#conteudo div.comentarios div.comentario div.infoComentarista ul li {font-size:10px;line-height:16px;}
+#conteudo div.comentarios div.comentario div.infoComentarista ul li.nivel {color:#00a1a9;font-size:12px;}
+#conteudo div.comentarios div.comentario div.infoComentarista ul li.exp {}
+#conteudo div.comentarios div.comentario div.infoComentarista ul li.hp {color:#757575;}
+#conteudo div.comentarios div.comentario div.infoComentarista ul li.badges img {max-width:15px;}
+#conteudo div.comentarios div.comentario.ultimo{background-image:url(../images/bg-comentarios.png);background-repeat:no-repeat;background-position:bottom left;}
+
+#conteudo div.comentarios div.comentar {background-color:#949494;}
+
+#conteudo div.comentarios div.comentario .reply-area-container{display:none;width:506px;}
+#conteudo div.comentarios div.comentario .reply-area-container textarea{resize:none;width:500px;border:1px solid #b9b9b9;height:15px;margin-top:6px;}
+
+
+#conteudo div.comentar.reply-container{min-height: 66px;}
+#conteudo div.comentar.reply-container input{margin-top:5px !important;}
+#conteudo div.comentar.reply-container .in_reply_to_container{color: #FFF;font-size: 11px;line-height: 12px;padding-top:6px;font-family:Helvetica,Arial;}
+#conteudo div.comentar.reply-container .in_reply_to_container a{display: inline-block; height:12px; width:12px;background: url(../images/cancel-comment-reply.jpg) bottom left; text-indent: -9999px;cursor:pointer;margin-right: 4px;margin-left:36px;}
+#conteudo div.comentar.reply-container .in_reply_to_container a:hover{background-position: top left;-moz-box-shadow: 0px 0px 4px #333;-webkit-box-shadow: 0px 0px 4px #333;box-shadow: 0px 0px 4px #333;}
+#conteudo div.comentar.reply-container input[type="text"],
+#conteudo div.comentar.reply-container textarea{top:22px;}
+
+
+
+#conteudo div.comentar{background:#949494;min-height:46px;width:550px;margin-left:80px;z-index:50;position:relative;}
+#conteudo div.comentar textarea,
+#conteudo div.comentar input[type="text"]{border:0px;font-size:12px;display:block;width:513px;left:25px;border:1px solid #b9b9b9;position:absolute;resize:none;top:2px;min-height:22px;outline:none;padding:0px;}
+#conteudo div.comentar textarea[disabled],
+#conteudo div.comentar input[disabled]{opacity:0.7;}
+#conteudo div.comentar span{font-size: 11px;font-family: Helvetica, Arial;color: #000;position: absolute;left: 24px;bottom: 3px;width:516px;}
+#conteudo div.comentar span > img{position:absolute;right:1px;display:none;}
+
+#conteudo div.must-be-logged_in{background:#949494;width:600px;padding:10px;display:block;}
+#conteudo div.must-be-logged_in p{color:#FFF;font-family:Engschrift;font-size:17px;text-transform:uppercase;padding:3px 0px;}
+#conteudo div.must-be-logged_in p > a{color:#000;text-decoration:none;}
+#conteudo div.must-be-logged_in fieldset{padding:15px 0px;position:relative;}
+#conteudo div.must-be-logged_in fieldset label{color:#FFF;font-family:Engschrift;font-size:15px;text-transform:uppercase;padding:3px 0px 3px 25px;}
+#conteudo div.must-be-logged_in fieldset input{display:inline-block;border:1px solid #888;padding:5px;width:175px;}
+#conteudo div.must-be-logged_in fieldset button{color:#FFF;background:#000;padding:3px 8px;border:none;font-family:Engschrift;font-size:15px;}
+#conteudo div.must-be-logged_in fieldset button:hover{color:#000;background:#FFF;}
+
+.no-margin-left{margin-left:0px !important;}
+
+#conteudo div.trigger-comentarios.no-margin-left{width:620px;}
+#conteudo div.comentarios div.comentario.no-margin-left {width:565px}
+#conteudo div.comentarios div.comentario.resposta.no-margin-left{width:570px;}
+#conteudo div.comentar.no-margin-left{width:620px;}
+#conteudo div.comentar.no-margin-left textarea,
+#conteudo div.comentar.no-margin-left input[type="text"]{width:590px;}
+
+input[type=text]:focus, input[type=password]:focus, textarea:focus{
+	-moz-box-shadow: 0px 0px 2px #00A1A9;
+	-webkit-box-shadow: 0px 0px 2px #00A1A9;
+	box-shadow: 0px 0px 3px #00A1A9 !important;
+	border: 1px solid #00A1A9 !important;
+	outline: none;
+}
+
+
+@font-face {
+    font-family: 'Engschrift';
+    src: url('../fonts/Engschrift/dinengschriftstd-webfont.eot');
+    src: url('../fonts/Engschrift/dinengschriftstd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Engschrift/dinengschriftstd-webfont.woff') format('woff'),
+         url('../fonts/Engschrift/dinengschriftstd-webfont.ttf') format('truetype'),
+         url('../fonts/Engschrift/dinengschriftstd-webfont.svg#DIN1451StdEngschrift') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

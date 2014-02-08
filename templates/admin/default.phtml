@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="<?php echo HOST;?>templates/admin/css/reset.css" />
+		<link rel="stylesheet" href="<?php echo HOST;?>templates/admin/css/admin.css" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>Administração Skynerd</title>
+		<script type="text/javascript" src="<?php echo HOST;?>templates/admin/js/jquery.js"></script>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div id="header">
+				<h1>Administração <span>Skynerd</span></h1>
+			</div>
+			<div id="main">
+				<div id="sidebar">
+					<ul>
+						<li><a href="<?php echo HOST;?>adm/posts-em-destaque">Promover postagens</a></li>
+						<li><a href="<?php echo HOST;?>adm/usuarios">Usuários</a></li>
+						<li><a href="<?php echo HOST;?>adm/moderar-comentarios">Moderar comentários</a></li>
+					</ul>
+					
+				</div>
+				<div id="content">
+					<?php $this->loadViewContent();?>
+					
+				</div>
+				
+			</div>
+			
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#sidebar ul li a").each(function(){
+					if(location.href.toString().indexOf($(this).attr("href")) != -1){
+						$("#sidebar ul li.active").removeClass("active");
+						$(this).parent().addClass("active");
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

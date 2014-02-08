@@ -1,0 +1,169 @@
+<?php $categories=array();?>
+<?php if(is_array($this->categories)):?>
+	<?php foreach($this->categories as $category) $categories[] = $category->name;?>
+<?php endif;?>
+<div class="post-container">
+	<div class="post skynerd_post_<?php echo $this->post_id;?>">
+		<div class="comentario site-post">
+			<h2>
+				<?php $safe_url = mb_strtolower(preg_replace('/--+/u', '-', preg_replace('/[^\w\-]+/u', '-', html_entity_decode($this->title))));?>
+				<?php if($this->via):?>
+					<?php echo $this->user;?>
+				<?php else:?>
+					<?php if($this->title):?>
+						<a href="<?php echo HOST;?>perfil/<?php echo $this->user;?>/post/<?php echo $this->post_id;?>-<?php echo $safe_url;?>"><?php echo $this->title;?></a>
+					<?php else:?>
+						<a href="<?php echo HOST.'perfil/'.$this->user;?>"><?php echo $this->user;?></a>
+					<?php endif;?>
+				<?php endif;?>
+			</h2>
+			<h5><?php echo $this->when;?></h5>
+			<div class="post-content"><?php echo $this->content;?></div>
+			<div class="clearfix"></div>
+		</div>
+		<?php if(! $this->via):?>
+			<div class="rate-n-share">
+				<div class="thumbs">
+					<ul class="balao" rel="<?php echo $this->post_id;?>">
+						<li class="tooltip bt-positivar <?php echo ($this->my_rating == '1')?'meu-voto':'';?>" title="Megaboga!"></li>
+						<li class="res-positivar"><span></span><?php echo $this->rating->megaboga;?></li>
+						<li class="tooltip bt-negativar <?php echo ($this->my_rating == '-1')?'meu-voto':'';?>" title="Whatever"></li>
+						<li class="res-negativar"><span></span><?php echo $this->rating->whatever;?></li>
+						<li class="bt-favoritar tooltip <?php echo $this->is_favorite ? 'favorito':'';?>" title="Favoritar"></li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		<?php endif;?>
+		<div class="clearfix"></div>
+	</div>
+
+	<div class="trigger-comentarios" rel="skynerd_post_<?php echo $this->post_id;?>_comments">
+		<a href="javascript:void(0);" class="qtde-comentarios">
+			<?php if($this->comments == 0):?>
+				<span>Nenhum</span> comentário
+			<?php else:?>
+				<?php if($this->comments == 1):?>
+					<span>1</span> comentário
+				<?php else:?>
+					<span><?php echo $this->comments;?></span> comentários
+				<?php endif;?>
+				<?php if($this->replies > 0):?>
+					<?php if($this->replies == 1):?>
+						(1 resposta)
+					<?php else:?>
+						(<?php echo $this->replies;?> respostas)
+					<?php endif;?>
+				<?php endif;?>
+			<?php endif;?>
+		</a>
+		<?php if($this->comments > 0):?>
+			<?php if(! is_array($this->comments_array)):?>
+				<a href="javascript:void(0);" class="obter-comentarios" ref="<?php echo $this->post_id;?>">Clique para ver todos os comentários</a>
+				<img src="<?php echo HOST;?>templates/default/images/comments-ajax-loader.gif" class="comment-ajax-loader" />
+			<?php endif;?>
+		<?php endif;?>
+	</div>
+	<div class="comentarios skynerd_post_<?php echo $this->post_id;?>_comments">
+		<?php if(is_array($this->comments_array)):?>
+			<?php	$idx = 0;?>
+			<?php foreach($this->comments_array as $k => $comment):?>
+				<?php $classname = ($idx % 2 == 0) ? 'cinza' : '';?>
+				<div class="comentario <?php echo $classname;?> comentario_<?php echo $comment->id;?>">
+					<?php if($this->current_user == $comment->user->login):?>
+						<a class="apagar comentario tooltip" rel="<?php echo $comment->id;?>" href="javascript:void(0);" title="Apagar">X</a>
+					<?php endif;?>
+					<span class="numeroComentario">
+						<?php echo ++$idx;?>
+					</span>
+					<span class="dados">
+						<span><a href="<?php echo HOST.'perfil/'.$comment->user->login;?>"><?php echo $comment->user->login;?></a> diz:</span>
+					</span>
+					<div class="data"><?php echo $comment->date;?></div>
+					<div class="textoUsuario">
+						<p><?php echo preg_replace('/(?<=|(?<=[.A-Za-z0-9_-]))@([.A-Za-z0-9_-]+[.A-Za-z0-9_-]+)/', '<a class="profile-link" href="'.HOST.'perfil/$1">@$1</a>', nl2br($comment->comment));?></p>
+					</div>
+					<ul class="dados" rel="<?php echo $comment->id;?>">
+						<li title="Megaboga!" class="tooltip north bt-positivar <?php echo ($comment->my_rating == '1')?'meu-voto':'';?>"></li>
+						<li class="res-positivar"><?php echo $comment->rating->megaboga;?></li>
+						<li title="Whatever..." class="tooltip north bt-negativar <?php echo ($comment->my_rating == '-1')?'meu-voto':'';?>"></li>
+						<li class="res-negativar"><?php echo $comment->rating->whatever;?></li>
+						<li class="reply"><a href="javascript:void(0);" rel="<?php echo $comment->id;?>">responder</a></li>
+					</ul>
+					<div class="infoComentarista">
+						<a href="<?php echo HOST.'perfil/'.$comment->user->login;?>">
+							<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo AVATAR_DIR;?>square/<?php echo $comment->user->avatar;?>" alt="" class="lazy" />
+						</a>
+						<ul>
+							<li class="nivel">Nv <?php echo $comment->user->experience->current_level;?></li>
+							<li class="exp">Exp <?php echo $comment->user->experience->exp_percent;?>%</li>
+							<li class="hp">HP<?php echo $comment->user->experience->hp;?></li>
+							<?php if(sizeof($comment->user->badges)):?>
+								<li class="badges">
+									<?php foreach($comment->user->badges as $badge):?>
+										<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo MEDIA_DIR;?>images/badges/<?php echo $badge->icon_url;?>" class="lazy" />
+									<?php endforeach;?>
+								</li>
+							<?php endif;?>
+						</ul>
+					</div>
+					<div class="reply-area-container">
+						<textarea name="reply" data-post-id="<?php echo $this->post_id;?>"></textarea>
+					</div>
+				</div>
+				<?php if(sizeof($comment->replies)):?>
+					<?php foreach($comment->replies as $reply):?>
+						<div class="comentario resposta <?php echo $classname;?> replies_<?php echo $comment->id;?>">
+							<div class="margem-resposta"></div>
+							<?php if($this->current_user == $reply->user->login):?>
+								<a class="apagar comentario" rel="<?php echo $reply->id;?>" href="javascript:void(0);" title="Apagar">X</a>
+							<?php endif;?>
+							<span class="dados">
+								<span><a href="<?php echo HOST.'perfil/'.$reply->user->login;?>"><?php echo $reply->user->login;?></a> responde:</span>
+							</span>
+							<div class="data">
+								<?php echo $reply->date;?>
+							</div>
+							<div class="textoUsuario">
+								<p><?php echo preg_replace('/(?<=|(?<=[.A-Za-z0-9_-]))@([.A-Za-z0-9_-]+[.A-Za-z0-9_-]+)/', '<a class="profile-link" href="'.HOST.'perfil/$1"e>@$1</a>', nl2br($reply->comment));?></p>
+							</div>
+							<div class="infoComentarista">
+								<a href="<?php echo HOST.'perfil/'.$reply->user->login;?>">
+									<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo AVATAR_DIR;?>square/<?php echo $reply->user->avatar;?>" alt="" class="lazy" />
+								</a>
+								<ul>
+									<li class="nivel">Nv <?php echo $reply->user->experience->current_level;?></li>
+									<li class="exp">Exp <?php echo $reply->user->experience->exp_percent;?>%</li>
+									<li class="hp">HP<?php echo $reply->user->experience->hp;?></li>
+									<?php if(sizeof($reply->user->badges)):?>
+										<li class="badges">
+											<?php foreach($reply->user->badges as $badge):?>
+												<img src="<?php echo HOST;?>media/images/blank.gif" data-src="<?php echo MEDIA_DIR;?>images/badges/<?php echo $badge->icon_url;?>" class="lazy" />
+											<?php endforeach;?>
+										</li>
+									<?php endif;?>
+								</ul>
+							</div>
+						</div>
+					<?php endforeach;?>
+				<?php endif;?>
+				<div class="margem-comentario"></div>
+			<?php endforeach;?>
+		<?php endif;?>
+	</div>
+	<div class="comentar skynerd_post_<?php echo $this->post_id;?>_area_comentario">
+		<form action="<?php echo HOST;?>comentar-post/" method="post">
+			<fieldset>
+				<input type="hidden" value="<?php echo $this->post_id;?>" name="post_id" />
+				<textarea name="comment" style="height:14px" data-post-id="<?php echo $this->post_id;?>"></textarea>
+				<span>
+					Pressione Shift+Enter para pular uma linha
+					<img src="<?php echo HOST;?>templates/default/images/comments-ajax-loader.gif" class="ajax-loader" />
+				</span>
+			</fieldset>
+		</form>
+		<div class="clearfix"></div>
+	</div>
+	<div class="margem-post margem_post_<?php echo $this->post_id;?>"></div>
+	<div class="clearfix"></div>
+</div>

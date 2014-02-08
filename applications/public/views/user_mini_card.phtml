@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="<?php echo HOST;?>templates/default/css/reset.css" rel="stylesheet" type="text/css" charset="utf-8" />
+		<style type="text/css">
+			#wrapper .skynerd-mini-ficha{position:absolute;top:0px;left:0px;height:65px;padding:4px 5px;width:340px;background:url(<?php echo HOST;?>templates/default/images/faca-mini-ficha.png) no-repeat left top;display:block;}
+			#wrapper .skynerd-mini-ficha a.goto-skynerd{position:absolute;top:4px;right:-8px;}
+			#wrapper .skynerd-mini-ficha a.goto-skynerd img{width:55px;}
+			#wrapper .skynerd-mini-ficha > img{width: 30px;border: 2px solid #000;display: block;position: absolute;left: 69px;top: 4px;}
+			#wrapper .skynerd-mini-ficha .user-info{display:block;position:absolute;left:110px;}
+			#wrapper .skynerd-mini-ficha .user-info > li{font-size:9px;color:white;font-family:Helvetica,Arial;padding:1px 0px;}
+			#wrapper .skynerd-mini-ficha .user-info > li:first-child{color:#00A1A9;font-size:12px;font-weight:bold;padding:2px 0px 6px 0px;}
+			#wrapper .skynerd-mini-ficha .user-info li b{font-weight:bold;}
+			#wrapper .skynerd-mini-ficha .user-info li ul{position: absolute;top: 19px;display: block;width: 120px;left: 44px;}
+			#wrapper .skynerd-mini-ficha .user-info li ul li{float:left;text-align:center;display:block;width:26px;vertical-align:top;}
+			#wrapper .skynerd-mini-ficha .user-info li ul li img{border:none;width:23px;}
+			
+			@font-face {
+			    font-family: 'Engschrift';
+			    src: url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.eot');
+			    src: url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.eot?#iefix') format('embedded-opentype'),
+			         url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.woff') format('woff'),
+			         url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.ttf') format('truetype'),
+			         url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.svg#DIN1451StdEngschrift') format('svg');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+		</style>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>Skynerd</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="skynerd-mini-ficha">
+				<!--
+				<a href="<?php echo HOST;?>" target="_blank" class="goto-skynerd">
+					<img src="<?php echo HOST;?>templates/default/images/images/logo-skynerd_01.png" />
+				</a>
+				-->
+				<img src='<?php echo HOST;?>media/images/avatar/square/<?php echo $this->avatar;?>'>
+				<ul class='user-info'>
+					<li><?php echo $this->login;?></li>
+					<li><b>Nv</b> <?php echo $this->experience->current_level;?></li>
+				 	<li><b>HP</b> <?php echo $this->experience->hp;?></li>
+				 	<li>
+						<ul class='user-badges'>
+							<?php foreach($this->badges as $badge):?>
+								<li><img src='<?php echo HOST;?>media/images/badges/<?php echo $badge->icon_url;?>' /></li>
+							<?php endforeach;?>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

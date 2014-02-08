@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="<?php echo HOST;?>templates/default/css/reset.css" rel="stylesheet" type="text/css" charset="utf-8" />
+		<style type="text/css">
+			* {outline:none;}
+			body{background:transparent;padding:0px;margin:0px;}
+			
+			a{display:block}
+			a.login, a.cadastro{font-family: 'Engschrift';font-size:12pt;color:white;text-transform:uppercase;text-decoration:none;letter-spacing:0.1em;padding:3px 7px;background:#646464;position:absolute;}
+			a.login:hover, a.cadastro:hover{background:#000;}
+			
+			a.login{top:25px;left:111px;}
+			a.cadastro{top:25px;left:166px;white-space: nowrap;}
+		
+			#wrapper {display:block;height:75px;width:322px;position:relative;}
+			#wrapper .skynerd-login{padding:20px 5px 20px 0px;display: block;height: 35px;width: 251px;position:absolute;}
+			#wrapper .skynerd-login-form{display: none;height: 55px;width: 253px;padding: 10px 5px;position:absolute;bottom:0px;background:url('<?php echo HOST;?>templates/default/images/bg-wrapper.png');}
+			#wrapper .skynerd-login-form form{}
+			#wrapper .skynerd-login-form form div{margin:3px 0px;position:relative;}
+			#wrapper .skynerd-login-form form div label{font-family:Helvetica,Arial;color:#fff;font-size:13px;display:block;float:left;width:41px;text-align:right;line-height:21px;padding-right:5px;}
+			#wrapper .skynerd-login-form form div input[type="text"],
+			#wrapper .skynerd-login-form form div input[type="password"]{border: 1px solid black;padding:2px 4px;}
+			#wrapper .skynerd-login-form form input[type="submit"]{display:block;position:absolute;right:3px;top:22px;background:#00a1a9;border:1px solid #00A1A9;padding:4px 7px;font-family: 'Engschrift';font-size:12pt;color:white;color:white;text-transform:uppercase;letter-spacing:0.1em;cursor:pointer;}
+			#wrapper .skynerd-login-form form input[type="submit"]:hover{background:black;color:white;border:1px solid black;}
+			#wrapper .skynerd-login-form form img{display:block;position:absolute;width:30px;right:20px;z-index:99;top:22px;display:none;}
+		
+			#wrapper .skynerd-mini-ficha{position:absolute;top:0px;left:0px;height:65px;padding:4px 5px;width:340px;background:url(<?php echo HOST;?>templates/default/images/faca-mini-ficha.png) no-repeat left top;display:none;}
+			#wrapper .skynerd-mini-ficha a.goto-skynerd{position:absolute;top:4px;right:-8px;}
+			#wrapper .skynerd-mini-ficha a.goto-skynerd img{width:55px;}
+			#wrapper .skynerd-mini-ficha > img{width: 30px;border: 2px solid #000;display: block;position: absolute;left: 69px;top: 4px;}
+			#wrapper .skynerd-mini-ficha .user-info{display:block;position:absolute;left:110px;}
+			#wrapper .skynerd-mini-ficha .user-info > li{font-size:9px;color:white;font-family:Helvetica,Arial;padding:1px 0px;}
+			#wrapper .skynerd-mini-ficha .user-info > li:first-child{color:#00A1A9;font-size:12px;font-weight:bold;padding:2px 0px 6px 0px;}
+			#wrapper .skynerd-mini-ficha .user-info li b{font-weight:bold;}
+			#wrapper .skynerd-mini-ficha .user-info li ul{position: absolute;top: 19px;display: block;width: 120px;left: 44px;}
+			#wrapper .skynerd-mini-ficha .user-info li ul li{float:left;text-align:center;display:block;width:26px;vertical-align:top;}
+			#wrapper .skynerd-mini-ficha .user-info li ul li img{border:none;width:23px;}
+		
+			@font-face {
+			    font-family: 'Engschrift';
+			    src: url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.eot');
+			    src: url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.eot?#iefix') format('embedded-opentype'),
+			         url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.woff') format('woff'),
+			         url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.ttf') format('truetype'),
+			         url('<?php echo HOST;?>templates/default/fonts/Engschrift/dinengschriftstd-webfont.svg#DIN1451StdEngschrift') format('svg');
+			    font-weight: normal;
+			    font-style: normal;
+			}
+		</style>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>Skynerd</title>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="skynerd-login">
+				<a href="<?php echo HOST;?>" target="_blank">
+					<img src="<?php echo HOST;?>templates/default/images/images/logo-skynerd_01.png" />
+				</a>
+				<a href="javascript:void(0)" class="login">Login</a>
+				<a href="<?php echo HOST;?>cadastre-se" target="_blank" class="cadastro">Cadastre-se</a>
+			</div>
+			<div class="skynerd-login-form">
+				<form method="post" action="">
+					<div>
+						<label for="login">login: </label>
+						<input type="text" name="login" id="login" />
+					</div>
+					<div>
+						<label for="password">senha: </label>
+						<input type="password" name="password" id="password" />
+					</div>
+					<input type="submit" value="Enviar" />
+					<img class="loading-image" src="<?php echo HOST;?>media/images/loading.gif" />
+				</form>
+			</div>
+			<div class="skynerd-mini-ficha"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("a.login").click(function(){
+				$("div.skynerd-login-form").slideToggle("fast").find("input:first").focus();
+			});
+			
+			$("form").submit(function(event){
+				event.stopPropagation();
+				event.preventDefault();
+				
+				var username = $("input[name=login]").val();
+				var password = $("input[name=password]").val();
+				
+				$.ajax({
+					url: "<?php echo HOST;?>mini-ficha/login",
+					type: "POST",
+					beforeSend: function(){
+						$("form input:submit").hide();
+						$("form img.loading-image").fadeIn();
+					},
+					crossDomain: true,
+					data: {
+						username: username,
+						password: password
+					},
+					success: function(data){
+						$("form img.loading-image").fadeOut();
+						
+						var o = jQuery.parseJSON(data);
+												
+						if(o.status == true){
+							
+							$(".skynerd-login-form, .skynerd-login").hide();
+							
+							var BadgesHTML = '';
+							for(i=0; i < o.badges.length; i++)
+								BadgesHTML += "<li><img src='<?php echo HOST;?>media/images/badges/"+o.badges[i].icon_url+"' /></li>";
+								
+								
+							var HTML = ""
+							+ "<img src='<?php echo HOST;?>media/images/avatar/square/"+o.avatar+"'>"
+							+ "<ul class='user-info'>"
+							+ "		<li>"+o.login+"</li>"
+							+ "		<li><b>Nv</b> "+o.experience.current_level+"</li>"
+							+ " 	<li><b>HP</b> "+o.experience.hp+"</li>"
+							+ " 	<li>"
+							+ "			<ul class='user-badges'>"
+							+ BadgesHTML
+							+ "			</ul>"
+							+ "		</li>"
+							+ "</ul>";
+							$("#wrapper .skynerd-mini-ficha").html(HTML).animate({ width: 'show' })
+						} else {
+							$("form input:submit").show();
+							$("form img.loading-image").hide();
+							$("div.skynerd-login-form").slideToggle("fast");
+						}
+					}
+				})
+			});
+		});
+	</script>
+</html>

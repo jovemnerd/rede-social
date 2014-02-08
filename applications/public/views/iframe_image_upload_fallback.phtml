@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<style>
+			*{overflow:hidden;cursor:pointer;opacity:0;filter:alpha(opacity=0);}
+			body{}
+			form{opacity:0;height:22px;width:35px;filter:alpha(opacity=0);}
+			input{display:block;width:100%;height:100%;cursor:pointer;}
+		</style>
+	</head>
+	<body>
+		<form action="<?php echo HOST;?>perfil/compartilhar/anexar-arquivos" method="post" enctype="multipart/form-data">
+			<input type="file" name="post_attachment" id="post_attachment" />
+		</form>
+	</body>
+	<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#post_attachment").change(function(){
+				var file_extension = ($("#post_attachment").val().split(".")[$("#post_attachment").val().split(".").length - 1]).toString().toLowerCase();;
+				var allowed_extensions = ['jpg', 'jpeg', 'png'];
+				var valid_extension = $.inArray(file_extension, allowed_extensions);
+				
+				if(valid_extension === -1){
+					alert("Formato de arquivo inválido");
+					return false;
+				} else {
+					$("form").submit()
+				}
+			});
+		})
+	</script>
+</html>

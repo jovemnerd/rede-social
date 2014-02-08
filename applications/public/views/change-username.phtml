@@ -1,0 +1,35 @@
+<div id="conteudo" style="width:960px">
+	<h2 class="aba esqueci-minha-senha">Ooooops!</h2>
+	<p>
+		Nerd, existe um problema com o seu login. Ele não pode conter espaços, acentos ou caracteres especiais.<br />
+		Para continuar utilizando a Skynerd, você deve alterá-lo. Vamos lá?
+	</p>
+	<span class="ilustra-nerdinho"></span>
+	<div class="box-login">
+		<h3>Atualmente, seu usuário é <span><?php echo utf8_encode($this->username);?></span>. Troque-o utilizando os campos abaixo.</h3>
+		<?php if($this->suggested_username != ''):?>		
+			<h3>Temos uma sugestão para você! De acordo com Slave ROBOTO, você poderia ser chamado de <span><?php echo $this->suggested_username;?></span>. O que acha?</h3>
+		<?php endif;?>
+		<form method="post" action="<?php echo HOST;?>alterar-usuario" id="force-username-change">
+			<input type="hidden" id="suggested-username" value="<?php echo $this->suggested_username;?>" />
+			<fieldset>
+				<div>
+					<label for="new_username">Ok.. EU QUERO QUE MEU NOVO USUÁRIO SEJA ESTE:</label>
+					<input type="text" name="new_username" id="new_username" class="primeira-coluna" style="width:330px" />
+				</div>
+				<div>
+					<input type="submit" value="Posso ter este usuário, SLAVE ROBOTO?"/>
+					<img src="<?php echo HOST;?>templates/default/images/comments-ajax-loader.gif" class="ajax-loader" />
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">var HOST='<?php echo HOST;?>';</script>
+<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/username_change.js"></script> 
+<style type="text/css">
+	.ajax-loader{position:absolute;right:280px;top:25px;display:none;}
+	input[disabled]{opacity:0.4;cursor:none;}
+	h3 span{text-transform:none;}
+</style>

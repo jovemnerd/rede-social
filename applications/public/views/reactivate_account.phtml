@@ -1,0 +1,11 @@
+<div class="subcontainer cancel-account">
+	<h3>Bem vindo de volta</h3>
+	<div class="content">
+		<p>Oi <span><?php echo $this->user;?></span>, você decidiu voltar à Skynerd?</p>
+		<p>Você ainda tem <?php echo $this->remaining_days;?> dia<?php echo ($this->remaining_days > 1) ? 's':'';?> para reativar sua conta.</p>
+		<br />
+		
+		<a class="button-mask" href="<?php echo HOST;?>perfil/configuracoes/reativar-conta/confirmar">Reativa agora por favor!</a>
+		<a class="button-mask" href="<?php echo HOST;?>logout">Ainda vou usar o<?php echo ($this->remaining_days > 1) ? 's':'';?> <?php echo $this->remaining_days;?> dia<?php echo ($this->remaining_days > 1) ? 's':'';?> que tenho para pensar</a>
+	</div>
+</div>

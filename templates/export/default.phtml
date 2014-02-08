@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# skynerd_jn: http://ogp.me/ns/fb/skynerd_jn#">
+		<?php if($this->og):?>
+			<meta property="fb:app_id" content="<?php echo FACEBOOK_APPID;?>" />
+			<meta property="og:title" content="<?php echo $this->og->title;?>" />
+			<meta property="og:description" content="<?php echo strip_tags($this->og->description);?>" />
+			<meta property="og:image" content="<?php echo $this->og->img;?>" />
+			<meta property="og:url" content="<?php echo HOST.URI;?>" />
+			<meta property="og:type" content="<?php echo ($this->og->type) ? $this->og->type : 'website';?>" />
+		<?php endif;?>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<title>Skynerd <?php if($this->og): echo " :: {$this->og->title}"; endif;?></title>
+		<link href="./css/reset.css?v=<?php echo CACHE_VERSION;?>" rel="stylesheet" type="text/css" charset="utf-8" />		
+		<link href="./css/estilos.css?v=<?php echo CACHE_VERSION;?>" rel="stylesheet" type="text/css" charset="utf-8" />
+		<link href="./css/comentarios.css?v=<?php echo CACHE_VERSION;?>" rel="stylesheet" type="text/css" charset="utf-8" />
+		<link href="./css/jquery.jcrop.css?v=<?php echo CACHE_VERSION;?>" rel="stylesheet" type="text/css" charset="utf-8" />
+		<link rel="shortcut icon" href="<?php echo HOST;?>favicon.ico" type="image/x-icon" />
+		<script type="text/javascript" src="./js/jquery.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript">
+			var HOST = "<?php echo HOST;?>";
+			var AVATAR_DIR = "<?php echo AVATAR_DIR;?>";
+			var MEDIA_DIR = "<?php echo MEDIA_DIR;?>";
+		</script>
+		<script type="text/javascript" src="./js/jquery.jcrop.min.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript" src="./js/jquery.tipsy.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript" src="./js/jquery.cookie.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript" src="./js/jquery.dragndropuploader.js?v=<?php echo CACHE_VERSION;?>"></script>
+		<script type="text/javascript" src="./js/jquery.lazyload.js?v=<?php echo CACHE_VERSION;?>"></script>
+	</head>
+	<body>
+		<div id="webcam-flash"></div>
+		<div id="fb-root"></div>
+		<div id="overlay">
+			<div class="background"></div>
+			<div class="content"></div>
+			<div class="clearfix"></div>
+		</div>
+		
+		<div id="wrapper">
+			<?php if($this->show_login_bar == true):?>
+				<div id="header">
+					<div id="publicidadeTopo">
+						
+					</div>
+					<div id="nav" class="deslogado fixed">
+						<h1>
+							<a href="<?php echo HOST;?>"><img src="./images/logo-skynerd.png" alt="skynerd" /></a>
+							<img src="./images/logo-message.png" alt="a rede social" />
+							<a href="http://jovemnerd.ig.com.br"><img src="./images/logo-jovemnerd.png" alt="jovemnerd" /></a>
+						</h1>
+						<img src="./images/ilustra-nerdinho.png" alt="" />
+						<ul class="painel">
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+				</div>	
+			<?php else:?>
+				<div id="header">
+					<div id='div-gpt-ad-1373046795970-4' style='width:728px; height:90px;' class="publicidadeTopo">
+						<script type='text/javascript'>
+							googletag.cmd.push(function() { googletag.display('div-gpt-ad-1373046795970-4'); });
+						</script>
+					</div>
+					<div id="nav">
+						<h1>
+							<a href="<?php echo HOST;?>"><img src="./images/logo-skynerd.png" alt="skynerd" /></a>
+							<img src="./images/logo-message.png" alt="a rede social" />
+							<a href="http://jovemnerd.ig.com.br"><img src="./images/logo-jovemnerd.png" alt="jovemnerd" /></a>
+						</h1>
+						<img src="./images/ilustra-nerdinho.png" alt="" />
+						<ul class="avisos">
+							<li class="notificacoes"><a href="javascript:void(0);">Notificações<span></span></a></a></li>
+							<li class="aliados"><a href="javascript:void(0);">Aliados<span></span></a></a></li>
+							<li class="mensagens"><a href="javascript:void(0);">Mensagens<span></span></a></li>
+						</ul>
+						<ul class="painel">
+							<li class="ajuda"><a href="<?php echo HOST;?>ajuda">Ajuda</a></li>
+							<li class="configurações"><a href="<?php echo HOST;?>perfil/configuracoes">Configurações</a></li>
+							<li class="logout"><a href="<?php echo HOST;?>logout">Logout</a></li>
+						</ul>
+						<div class="clearfix"></div>
+						<div id="notificacoes-container">
+							<div id="notificacoes" class="notificacao">
+								<h4>Notificações</h4>
+								<ul class="sem-novas"><li>Nenhuma nova notificação</li></ul>
+								<div class="clearfix"></div>
+							</div>
+							<div id="amizades-pendentes" class="notificacao">
+								<h4>Pedidos de amizade</h4>
+								<ul class="sem-novas"><li>Nenhum pedido de amizade pendente</li></ul>
+								<div class="clearfix"></div>
+							</div>
+							<div id="mensagens" class="notificacao">
+								<h4>Mensagens</h4>
+								<ul class="sem-novas"><li>Nenhuma nova mensagem</li></ul>
+								<div class="clearfix"></div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>	
+			<?php endif;?>
+			<div id="container">
+				<?php $this->loadViewContent();?>
+			</div>
+			<div id="rodape">
+				<div>
+					<p>&copy; <span>2002</span>-<span><?php echo date('Y');?></span> <span>Jovem Nerd</span> | <span>Pazos e Ottoni</span> | <span>Versão 6.0 (</span>Lambda<span>)</span></p>
+					<p>Todas as imagens de filmes, séries, etc são</p>
+					<p>marcas registradas dos seus respectivos proprietários</p>
+				</div>
+			</div>
+		</div>
+    </body>
+    <script type="text/javascript" src="./js/jquery.tmpl.min.js?v=<?php echo CACHE_VERSION;?>"></script>
+    <script type="text/javascript" src="./js/redactor.min.js?v=<?php echo CACHE_VERSION;?>"></script>
+    <script type="text/javascript" src="./js/redactor.plugins.js?v=<?php echo CACHE_VERSION;?>"></script>
+    <script type="text/javascript" src="./js/jquery.webcam.js?v=<?php echo CACHE_VERSION;?>"></script>
+    <script type="text/javascript" src="./js/jquery.autogrow.js?v=<?php echo CACHE_VERSION;?>"></script>
+    <script type="text/javascript" src="./js/skynerd.js?v=<?php echo CACHE_VERSION;?>"></script>
+    <script type="text/javascript" src="./js/rating.js?v=<?php echo CACHE_VERSION;?>"></script>
+    <?php require_once(TEMPLATE_DIR."default/js/json_templates.phtml");?>
+</html>

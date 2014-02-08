@@ -1,0 +1,10 @@
+<html>
+	<head></head>
+	<body></body>
+	<script type="text/javascript">
+		parent.$("#areaPostagem").append("\\\\n<?php echo $this->image_name;?>");
+		setTimeout(function(){
+			window.location.href = "<?php echo HOST;?>perfil/compartilhar/anexar-arquivos/fallback"
+		}, 350);
+	</script>
+</html>

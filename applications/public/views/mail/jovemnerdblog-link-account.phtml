@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	</head>
+	<body style='background: url("<?php echo HOST;?>media/images/email-content/background.png"); padding:0px; margin:0px;' link="#00fcff" alink="#00a1a9" vlink="#00fcff">
+		<div style='margin:0 auto;display:block;width:500px;'>
+			<table width='500'>
+				<tr>
+					<td>
+						<img src='<?php echo HOST;?>media/images/email-content/header_confirmacao_email.png' />
+					</td>
+				</tr>
+				<tr>
+					<td style='padding: 5px;'>
+						<font face='Helvetica, Arial' color='white' size="2">
+							<p style='padding: 1px;'>Ol&aacute; <?php echo $this->username;?></p>
+							<p style='padding: 1px;'>Nerd, uma solicita&ccedil;&Atilde;0 de vínculo dessa conta do blog JovemNerd foi feita na Skynerd. Para aceitar, clique no link abaixo.</p>
+							<p style='padding: 1px;'><a href='<?php echo $this->link;?>'><?php echo $this->link;?></a></p>
+							<p style='padding: 1px;'>Se preferir, copie e cole o link acima no seu navegador favorito (N&Atilde;O VALE INTERNET EXPLORER!).</p>
+							<p style='padding: 1px;'>&Eacute; importante lhe dizer que esse link s&oacute; &eacute; v&aacute;lido para hoje hein nerd! Amanh&atilde;, ele j&aacute; n&atilde;o vale mais.</p>
+							<p style='padding: 1px;'>Se n&atilde;o foi você que solicitou isso, desconsidere.</p>
+						</font>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<a href='http://jovemnerd.ig.com.br'>
+							<img src='<?php echo HOST;?>media/images/email-content/footer_email_confirmacao.png' border='0' />
+						</a>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>

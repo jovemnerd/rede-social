@@ -1,0 +1,78 @@
+body{background:url(./images/bg-body.png);}
+#wrapper{display:table;margin:0 auto;width:1200px;background:url(./images/bg-wrapper.png);}
+
+#header{background:url(./images/bg-header.png) left top no-repeat;padding:15px 10px;display:block;}
+#header h1{font-family:Engschrift;text-transform:uppercase;font-size:25px;}
+#header h1 > span{color:#FFF;}
+
+#sidebar{background:url(./images/bg-wrapper.png);display:block;float:left;width:300px;}
+#sidebar ul{}
+#sidebar ul li{border-bottom:1px solid #333;}
+#sidebar ul li a{color:#FFF;text-decoration:none;font-family:Engschrift;text-transform:uppercase;display:block;padding:12px 10px;}
+#sidebar ul li.active,
+#sidebar ul li:hover{background:url(./images/bg-wrapper.png);}
+#sidebar ul li.active a,
+#sidebar ul li:hover a{text-indent:30px;background:url(./images/sidebar-active-item-bg.png) 15px center no-repeat;}
+
+#content{display:block;float:left;width:900px;}
+#content h2{font-family:Engschrift;font-size:20px;display:block;background:url(./images/bg-title.png);padding:10px;border-bottom:1px solid #333;}
+#content > div{display:block;background:url(./images/bg-content.png);padding:10px;font-family:Helvetica, Arial;font-size:13px;margin-bottom:15px;}
+#content > div .post{border-bottom:1px solid #333;padding:15px;}
+#content > div .post.no-border-bottom{border-bottom:none;}
+#content > div .post h4{font-family:Engschrift;font-size:20px;display:block;padding:5px 0px;color:#333;}
+#content > div .post .info{color:#444;font-size:11px;}
+#content > div .post .info a{text-decoration:none;}
+#content > div .post .info ul{border-top:1px solid #aaa;border-bottom:1px solid #aaa;padding:5px 0px;position:relative;}
+#content > div .post .info ul li{display:inline-block;text-indent:40px;background-image:url(./images/sprites-actions.png);background-repeat:no-repeat;padding:6px 0px;}
+#content > div .post .info ul li.megabogas{background-position:10px -24px;}
+#content > div .post .info ul li.whatevers{background-position:10px -42px;}
+#content > div .post .info ul li.comments{background-position:6px -2px;}
+#content > div .post .info ul li.reblogs{background-position:9px -63px;}
+#content > div .post .info ul li.promote{text-indent:0px;background:none;position:absolute;right:0px;background:#000;top:1px;}
+#content > div .post .info ul li.promote a{background:#000;padding:6px 8px;color:#FFF;font-family:Engschrift;font-size:18px;}
+#content > div .post .info ul li.promote a:hover{color:#000;background:#FFF;}
+#content > div .post .content{padding:10px 0px;}
+#content > div .post .content img{max-width:850px;text-align:center;}
+
+#content > div .user{}
+#content > div .user .avatar{float:left;display:block;margin:15px;border:4px solid #000;}
+#content > div .user .info{float:left;display:block;margin:15px 0px;width:565px;}
+#content > div .user .info h3{font-family:Engschrift;color:#277f83;font-size:26px;}
+#content > div .user .info h3 span{color:#333;font-size:20px;margin-left:15px;}
+#content > div .user .info h5{font-family:Engschrift;color:#277f83;font-size:20px;text-transform:uppercase;padding-top:20px;}
+#content > div .user .info ul.data{}
+#content > div .user .info ul.data li{margin:5px 0px;font-family:Helvetica, Arial;}
+#content > div .user .info ul.data li b{font-weight:bold;}
+#content > div .user .info ul.badges{}
+#content > div .user .info ul.badges li{display:inline-block;vertical-align:top;padding:5px 5px 0px 5px;}
+#content > div .user .info ul.badges li img{width:70px;height:70px;}
+#content > div .user .info ul.actions{}
+#content > div .user .info ul.actions li{display:inline-block;}
+#content > div .user .info ul.actions li a{color:#FFF;background:#000;padding:4px 8px;text-decoration:none;font-family:Engschrift;font-size:18px;text-transform:uppercase;}
+#content > div .user .info ul.actions li a.disabled{opacity:0.3;}
+
+#content > div .comment{padding:5px 10px;position:relative;min-height:100px;background:rgba(0,0,0,0.1);}
+#content > div .comment.reply{border-top:1px solid #FFF;}
+#content > div .comment.cinza{background:rgba(255,255,255,0.2);}
+#content > div .comment .index{position:absolute;left:0px;top:0px;background:#00a1a9;color:#FFF;padding:2px 3px;font-size:10px;font-family:Helvetica, Arial;}
+#content > div .comment .info ul{width:630px;display:none;}
+#content > div .comment:hover .info ul{display:block !important;}
+#content > div .comment .text{padding:15px;width:614px;}
+#content > div .comment .user{position:absolute;right:10px;top:10px;text-align:right;display:block;}
+#content > div .comment .user a{display:block;width:100px;text-decoration:none;}
+#content > div .comment .user img{display:block;float:right;}
+#content > div .comment .user span{padding:2px 0px;display:block;font-weight:bold;color:#333;text-transform:uppercase;word-wrap:break-word;}
+
+#content .clear{clear:both;}
+
+
+@font-face {
+    font-family: 'Engschrift';
+    src: url('./fonts/Engschrift/dinengschriftstd-webfont.eot');
+    src: url('./fonts/Engschrift/dinengschriftstd-webfont.eot?#iefix') format('embedded-opentype'),
+         url('./fonts/Engschrift/dinengschriftstd-webfont.woff') format('woff'),
+         url('./fonts/Engschrift/dinengschriftstd-webfont.ttf') format('truetype'),
+         url('./fonts/Engschrift/dinengschriftstd-webfont.svg#DIN1451StdEngschrift') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

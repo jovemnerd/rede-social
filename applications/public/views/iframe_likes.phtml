@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Skynerd</title>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<link href="<?php echo HOST;?>templates/default/css/reset.css" rel="stylesheet" type="text/css" charset="utf-8" />		
+		<link href="<?php echo HOST;?>templates/default/css/rating.css" rel="stylesheet" type="text/css" charset="utf-8" />
+		<style>
+			body{padding:8px;}
+			.msg-erro{position: absolute;left: 215px;font-family: Helvetica, Arial;color: white;font-size: 13px;display: block;width: 330px;top: 5px;}
+			.msg-erro a{color:#00a1a9;}
+		</style>
+	</head>
+	<body>
+		<div class="rate-n-share">
+			<div class="thumbs">
+				<ul class="balao" rel="<?php echo $this->post_id;?>">
+					<li class="bt-positivar tooltip" title="Megaboga!"></li>
+					<li class="res-positivar"><span></span></li>
+					<li class="bt-negativar tooltip" title="Whatever"></li>
+					<li class="res-negativar"><span></span></li>
+					<li class="bt-favoritar tooltip" title="Favoritar"></li>
+				</ul>
+				<span class="msg-erro"></span>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</body>
+	<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/jquery.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+				type: "GET",
+				url: "<?php echo HOST;?>dados-do-post",
+				data: {
+					wpid: '<?php echo $this->wpid;?>'
+				},
+				success: function(server_json){
+					var post_data = $.parseJSON(server_json);
+					if(post_data.logged_in == false)
+						$(".msg-erro").html('Antes de continuar, você precisa <a href="<?php echo HOST;?>" target="_blank">fazer login</a> na SkyNerd')
+						
+					$(".res-positivar").append(post_data.rating.megaboga);
+					$(".res-negativar").append(post_data.rating.whatever);
+					
+					if(post_data.rating.my_rating == "1")
+						$(".bt-positivar").addClass("meu-voto");
+					else if(post_data.rating.my_rating == "-1")
+						$(".bt-negativar").addClass("meu-voto");
+						
+					if(post_data.rating.favorite)
+						$(".bt-favoritar").addClass("favorito");
+				}
+			});
+		});
+		
+		var HOST='<?php echo HOST;?>';
+	</script>
+	<script type="text/javascript" src="<?php echo HOST;?>templates/default/js/rating.js"></script>
+</html>

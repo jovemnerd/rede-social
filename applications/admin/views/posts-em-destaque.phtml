@@ -1,0 +1,55 @@
+<h2>Manualmente</h2>
+<div>
+	<form method="get" action="<?php echo HOST.URI?>">
+		<div>
+			<label for="id">Qual é o ID do post?</label>
+			<input type="text" id="id" name="id" value="<?php echo $this->post_id;?>" />
+			<button>Procurar</button>
+		</div>
+	</form>
+	
+	<?php if((! $this->search_data) && $this->post_id):?>
+		<div class="post no-border-bottom">
+			<div class="content">Sua busca não retornou resultados. Leve em consideração que posts já promovidos são descartados.</div>
+		</div>
+	<?php elseif($this->search_data):?>
+		<div class="post no-border-bottom">
+			<h4><?php echo $this->search_data->title;?></h4>
+			<p class="info">por <a href="https://skynerd.com.br/<?php echo $this->search_data->login;?>" target="_blank">@<?php echo $this->search_data->login;?></a> em <a href="https://skynerd.com.br/perfil/<?php echo $this->search_data->login;?>/post/<?php echo $this->search_data->id;?>" target="_blank"><?php echo $this->search_data->date;?></a></p>
+			<div class="content">
+				<?php echo $this->search_data->content;?>
+			</div>
+			<div class="info">
+				<ul>
+					<li class="megabogas"><?php echo +$this->search_data->like_count;?> MEGABOGAS</li>
+					<li class="whatevers"><?php echo +$this->search_data->dislike_count;?> WHATEVERS</li>
+					<li class="comments"><?php echo +$this->search_data->comment_count;?> COMENTÁRIOS</li>
+					<li class="reblogs"><?php echo +$this->search_data->reblog_count;?> REBLOGS</li>
+					<li class="promote"><a href="<?php echo HOST;?>adm/posts-em-destaque/promover/<?php echo $this->search_data->id;?>">PROMOVER</a></li>
+				</ul>
+			</div>
+		</div>
+	<?php endif;?>
+</div>
+
+<h2>Posts em Destaque</h2>
+<div>
+	<?php foreach($this->data as $post):?>
+		<div class="post">
+			<h4><?php echo $post->title;?></h4>
+			<p class="info">por <a href="https://skynerd.com.br/<?php echo $post->login;?>" target="_blank">@<?php echo $post->login;?></a> em <a href="https://skynerd.com.br/perfil/<?php echo $post->login;?>/post/<?php echo $post->id;?>" target="_blank"><?php echo $post->date;?></a></p>
+			<div class="content">
+				<?php echo $post->content;?>
+			</div>
+			<div class="info">
+				<ul>
+					<li class="megabogas"><?php echo +$post->like_count;?> MEGABOGAS</li>
+					<li class="whatevers"><?php echo +$post->dislike_count;?> WHATEVERS</li>
+					<li class="comments"><?php echo +$post->comment_count;?> COMENTÁRIOS</li>
+					<li class="reblogs"><?php echo +$this->search_data->reblog_count;?> REBLOGS</li>
+					<li class="promote"><a href="<?php echo HOST;?>adm/posts-em-destaque/promover/<?php echo $post->id;?>">PROMOVER</a></li>
+				</ul>
+			</div>
+		</div>
+	<?php endforeach;?>
+</div>

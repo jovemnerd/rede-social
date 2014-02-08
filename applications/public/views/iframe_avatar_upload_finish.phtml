@@ -1,0 +1,11 @@
+<html>
+	<head></head>
+	<body></body>
+	<script type="text/javascript">
+		var data = eval('<?php echo $this->json;?>');
+		parent.mostrarOverlayParaCortarAvatar(data);
+		setTimeout(function(){
+			window.location.href = "<?php echo HOST;?>perfil/configuracoes/trocar-avatar/fallback"
+		}, 350);
+	</script>
+</html>
