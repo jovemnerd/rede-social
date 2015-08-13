@@ -64,7 +64,7 @@
 					$this->session->logged_in = true;
 					$this->session->user = $user;
 				#	$this->session->user->active = 1;
-					$this->session->accept_token = md5(REQUEST_IP) . sha1('SkyNerd a REDE SOCIAL do JoVemNerd');
+					$this->session->accept_token = md5(REQUEST_IP) . sha1(SESSION_SALT);
 					
 					
 					 if($this->post->keep_me_logged_in == 1){
@@ -72,7 +72,7 @@
 						$this->cookies->logged_in = 1;
 						$this->cookies->user = base64_encode($user->id);
 						$this->cookies->expected_user = $user->login;
-						$this->cookies->accepted_key = md5(md5($_SERVER['HTTP_USER_AGENT']) . $user->id . sha1('SkyNerd a REDE SOCIAL do JoVemNerd'));
+						$this->cookies->accepted_key = md5(md5($_SERVER['HTTP_USER_AGENT']) . $user->id . sha1(SESSION_SALT));
 					}
 				}
 				

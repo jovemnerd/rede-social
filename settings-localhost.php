@@ -1,6 +1,6 @@
 <?php
 	
-	define('PROJECT_DIR', 'skynerd');
+	define('PROJECT_DIR', 'rede-social');
 	define('DEBUG', true);
 	
 	define('DATABASE_NAME', 'skynerd');
@@ -38,9 +38,10 @@
 	define('FACEBOOK_APPTOKEN', '');
 	define('FACEBOOK_APPNAMESPACE', '');
 	
+	define('SESSION_SALT', 'aldfjhoduyf8osh4hbrwyftydfgdshfbhdsbfh');
 	define('REQUEST_IP', $_SERVER['HTTP_X_FORWARDED_FOR']);
-	define("REQUEST_TOKEN", md5($_SERVER['HTTP_X_FORWARDED_FOR']) . sha1('SAAAAALT'));
-	define('REQUEST_PROTOCOL', 'https');
+	define("REQUEST_TOKEN", md5($_SERVER['HTTP_X_FORWARDED_FOR']) . sha1(SESSION_SALT));
+	define('REQUEST_PROTOCOL', 'http');
 	
 	# Configurações de email
 	define('MAIL_USERNAME', 'email@gmail.com');
@@ -56,7 +57,7 @@
 	define('LOG_ONLY_DB_ERRORS', false);
 	
 	# CONFIGURAÇÕES DO MEMCACHE
-	define('USE_MEMCACHE', true);
+	define('USE_MEMCACHE', false);
 	define('MEMCACHE_SECONDS', 30);
 	
 
