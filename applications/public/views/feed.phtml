@@ -168,62 +168,6 @@
 <div class="clearfix"></div>
 
 <script type="text/javascript">
-<?php/*
-	$(document).ready(function(){
-		
-		$("#create-list").click(function(){
-			$(".info-lista div > a").trigger("click")
-			var htmlStr = ""
-			+ "<div style='background-color:#fff;box-shadow:0px 0px 3px #444 inset;padding:15px;width:500px;'>"
-			+ "		<div style='float:left;'><h1>Criar nova lista</h1></div>"
-			+ "		<div class='new_list_error_alert' style='line-height:13px;font-size: 10px;color: #C00;text-align: right;font-family:Helvetica,Arial;font-weight:bold;'></div>"
-			+ "		<div class='clearfix'></div>"
-			+ "		<div style='padding-left:30px;font-size:13px;color:#454545;font-family:Helvetica, Arial;text-transform: none;margin-top:15px;'>"
-			+ "			<label for='new_list_name'>Título da nova lista:</label>"
-			+ "			<input type='text' id='new_list_name' name='new_list_name' style='width:341px;'/>"
-			+ "		</div>"
-			+ "		<div><h2>Categorias que compõem a nova lista</h2></div>"
-			+ "		<div style='padding-left:50px;'>"
-			<?php foreach($this->categories as $category):?>
-				+ '		<span>'
-				+ '			<input type="checkbox" value="<?php echo $category->id;?>" id="new_list_category_<?php echo $category->id;?>" name="new_list_categories[]" ref="<?php echo $category->name;?>">'
-				+ '			<label for="new_list_category_<?php echo $category->id;?>"><?php echo $category->name;?></label>'
-				+ '		</span>'
-			<?php endforeach;?>
-			+ "		</div>"
-			+ "		<div class='clearfix'></div>"
-			+ "		<div><h2>Redes sociais</h2></div>"
-			+ "		<div style='padding-left:50px;'>"
-					<?php $qtty=0; foreach($this->data->social_networks as $each) if(! is_null($each->access_token)) $qtty++;?>
-					<?php if($qtty > 0):?>
-						<?php foreach($this->data->social_networks as $social_network):?>
-							<?php if($social_network->access_token and $social_network->can_be_listed==1):?>
-							+ '		<span>'
-							+ '			<input type="checkbox" value="<?php echo $social_network->id;?>" id="new_list_sn_<?php echo $social_network->id;?>" name="new_list_social_networks[]" ref="<?php echo $social_network->name;?>">'
-							+ '			<label for="new_list_sn_<?php echo $social_network->id;?>"><?php echo $social_network->name;?></label>'
-							+ '		</span>'
-							<?php endif;?>
-						<?php endforeach;?>
-					<?php else:?>
-						+ "<span style='width:auto;'>Aparentemente você ainda não tem nenhuma rede social associada com a sua conta. Para associá-las, acesse a página de <a href='<?php echo HOST;?>perfil/configuracoes'>configurações</a></span>"
-					<?php endif;?>
-			+ "		<div class='clearfix'></div>"
-			+ "		</div>"
-			+ "</div>"
-			+ "<div class='clearfix'></div>"
-			+ "<div style='text-align:right;width:530px;margin-top:10px;'>"
-			+ "		<button class='cancel'>Cliquei errado, cancela isso.</button>"
-			+ "		<button class='create-list'>Vai lá amigo, cria a lista.</button>"
-			+ "</div>";
-			
-			$("#overlay .content").html(htmlStr).css({"margin-left": -250});
-			$("#overlay").fadeIn();
-			
-			$("input[name=new_list_name]").focus();
-		});
-	});
-*/?>
-
 	<?php
 		$categories = array();
 		foreach($this->categories as $category)
@@ -237,10 +181,3 @@
         removeConfirmation: true
     });
 </script>
-
-<h2>DUMP</h2>
-<pre>
-<?php 
-print_r($this->categories);
-?>
-</pre>
